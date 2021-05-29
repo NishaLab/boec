@@ -107,5 +107,5 @@ def get_user_role_root_path(user):
     if user.role == 1:
         return "/boec/main"
     if user.role == 2:
-        return "/admin"       
+        return "/boec/admin"       
     return None
