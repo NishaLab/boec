@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('discriminator', models.CharField(db_column='Discriminator', max_length=255)),
-                ('role', models.SmallIntegerField(choices=[(1, 'CUSTOMER'), (2, 'ADMIN')], default=1)),
+                ('role', models.SmallIntegerField(choices=[(1, 'CUSTOMER'), (2, 'SALE'), (3, 'INVENTORY')], default=1)),
                 ('status', models.CharField(db_column='status', default='Available', max_length=100)),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
