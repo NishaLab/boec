@@ -12,7 +12,8 @@ class User(AbstractUser):
         default=UserRole.CUSTOMER.value,
         choices=[
             (UserRole.CUSTOMER.value, UserRole.CUSTOMER.name),
-            (UserRole.ADMIN.value, UserRole.ADMIN.name)
+            (UserRole.SALE.value, UserRole.SALE.name),
+            (UserRole.INVENTORY.value, UserRole.INVENTORY.name)
         ]
     )
     address = models.CharField(db_column='address', max_length=100, default="")
