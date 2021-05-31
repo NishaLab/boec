@@ -105,7 +105,7 @@ class RoleRequiredView(View):
 
 def get_user_role_root_path(user):
     if user.role == 1:
-        return "/boec/main"
+        return "/boec/customer"
     if user.role == 2:
         return "/boec/admin"       
     return None
