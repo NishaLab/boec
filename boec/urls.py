@@ -21,8 +21,9 @@ from django.conf import settings
 
 urlpatterns = (
     [
-        path('admin/', admin.site.urls),
-        path('', include('boec_core.urls'))
+        path('register/', admin.site.urls),
+        path('', include('boec_core.urls')),
+        path('', include('boec_admin.urls'))
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
