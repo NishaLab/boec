@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'boec_core',
+    'boec_admin',
     'crispy_forms',
     'widget_tweaks'
 ]
@@ -168,3 +169,4 @@ LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/user/login'
 
 PAGE_SIZE = 10
+
