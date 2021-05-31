@@ -32,12 +32,18 @@ class Category(models.Model):
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
 
+class SubCategory(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    parent = models.ForeignKey('Category', models.CASCADE, db_column='CategoryId')  # Field name made lowercase.
+
 class Product(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
     category = models.ForeignKey('Category', models.CASCADE, db_column='CategoryId')  # Field name made lowercase.
-
+    sub_category = models.ForeignKey('SubCategory', models.CASCADE, db_column='SubCategoryId', null=True)
 class ProductVariant(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     product = models.ForeignKey('Product', models.CASCADE, db_column='ProductId')
