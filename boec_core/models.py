@@ -26,27 +26,33 @@ class Vendor(models.Model):
     address = models.CharField(db_column='Address', max_length=255, blank=True, null=True)  # Field name made lowercase.
     phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)  # Field name made lowercase.
     desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
+
 class Category(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
+
 class Product(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
     desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
     category = models.ForeignKey('Category', models.CASCADE, db_column='CategoryId')  # Field name made lowercase.
+
 class ProductVariant(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     product = models.ForeignKey('Product', models.CASCADE, db_column='ProductId')
     quantity = models.IntegerField(default=0)
     price = models.FloatField(db_column='Price')  # Field name made lowercase.\
     vendor = models.ForeignKey('Vendor', models.CASCADE, db_column='VendorId')
+    is_feature = models.BooleanField(db_column='is_feature', default=False)
+    is_selling = models.BooleanField(db_column='is_selling', default=False)
 class OrderedProduct(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     quantity = models.IntegerField(default=0)
     price = models.FloatField(db_column='Price')  # Field name made lowercase.\
     product = models.ForeignKey('ProductVariant', models.CASCADE, db_column='VariantId')
     order = models.ForeignKey('Order', models.CASCADE, db_column='OrderId')
+
 class Order(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     shipping_address = models.CharField(db_column='ShippingAddress', max_length=255, blank=True, null=True)
@@ -54,7 +60,16 @@ class Order(models.Model):
     sale = models.ForeignKey('User', models.CASCADE,related_name="sale", db_column='SellerID', null=True)
     payment_type =  models.CharField(db_column='Payment_type', max_length=255, blank=True, null=True)
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
+
 class ShippingInfo(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     status = models.IntegerField(default=0)
+    create_at = models.DateTimeField(db_column="create_at", auto_now=True)
+
+class CustomerReview(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    rating = models.IntegerField(default=0)
+    content = models.CharField(db_column='Content', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    customer = models.ForeignKey('User', models.CASCADE, related_name="customer", db_column='UserID')
+    product = models.ForeignKey('ProductVariant', models.CASCADE, db_column='VariantId')
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
