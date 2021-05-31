@@ -46,6 +46,7 @@ class ProductVariant(models.Model):
     vendor = models.ForeignKey('Vendor', models.CASCADE, db_column='VendorId')
     is_feature = models.BooleanField(db_column='is_feature', default=False)
     is_selling = models.BooleanField(db_column='is_selling', default=False)
+    sale_off = models.FloatField(db_column='sale_off', default=0, null=True) 
 class OrderedProduct(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     quantity = models.IntegerField(default=0)
@@ -70,6 +71,6 @@ class CustomerReview(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     rating = models.IntegerField(default=0)
     content = models.CharField(db_column='Content', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    customer = models.ForeignKey('User', models.CASCADE, related_name="customer", db_column='UserID')
+    customer = models.ForeignKey('User', models.CASCADE, db_column='UserID')
     product = models.ForeignKey('ProductVariant', models.CASCADE, db_column='VariantId')
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
