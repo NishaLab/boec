@@ -128,9 +128,6 @@
                             <li class="breadcrumb-item">
                                 <a href="index.html">Home</a>
                             </li>
-                            <li class="breadcrumb-item">
-                                <a>E-commerce</a>
-                            </li>
                             <li class="breadcrumb-item active">
                                 <strong>Orders</strong>
                             </li>
@@ -234,8 +231,8 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <button class="btn-white btn btn-xs">View</button>
-                                                <button class="btn-white btn btn-xs">Edit</button>
+                                                <button class="btn-white btn btn-xs"><a href="{% url 'detail_order' item.id %}">View</a></button>
+                                                <button class="btn-white btn btn-xs"><a href="{% url 'detail_order' item.id %}">Edit</a></button>
                                                 <button class="btn-white btn btn-xs">Delete</button>
                                             </div>
                                         </td>
@@ -260,14 +257,7 @@
     
     
             </div>
-            <div class="footer">
-                <div class="float-right">
-                    10GB of <strong>250GB</strong> Free.
-                </div>
-                <div>
-                    <strong>Copyright</strong> Example Company &copy; 2014-2018
-                </div>
-            </div>
+          
     
             </div>
     </div>
