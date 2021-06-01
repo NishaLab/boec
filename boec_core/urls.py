@@ -8,6 +8,7 @@ urlpatterns = [
     path('user/logout', auth_views.LogoutView.as_view(next_page='/user/login'), name='logout'),
     path('boec/admin', views.AdminIndexView.as_view(), name="login"),
     path('boec/customer', views.CustomerIndexView.as_view(), name="main_customer"),
+    path('boec/shopping-cart', views.CartView.as_view(), name="cart_view"),
 
     path('', views.Index.as_view(), name='index')
 ]

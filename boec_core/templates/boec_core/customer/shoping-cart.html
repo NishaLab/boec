@@ -11,7 +11,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BoEC | Template</title>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
@@ -80,7 +79,7 @@
                             <li><a href="#">Trang</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart">Cart</a></li>
+                                    <li><a href="./shoping-cart">Cart</a></li>
                                     <li><a href="./checkout">Check out</a></li>
                                 </ul>
                             </li>
@@ -105,19 +104,27 @@
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>Các Loại Mặt Hàng</span>
+                            <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Sách</a></li>
-                            <li><a href="#">Đồ điện tử</a></li>
-                            <li><a href="#">Quần Áo</a></li>
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
                         </ul>
                     </div>
                 </div>
@@ -143,221 +150,151 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="/static/images/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
 
-    <!-- Categories Section Begin -->
-    <section class="categories">
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg">
         <div class="container">
             <div class="row">
-                <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="/static/images/categories/cat-1.jpg">
-                            <h5><a href="#">Quần Áo</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="/static/images/categories/cat-2.jpg">
-                            <h5><a href="#">Đồ Điện Tử</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="/static/images/categories/cat-3.jpg">
-                            <h5><a href="#">Sách</a></h5>
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Shopping Cart</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Shopping Cart</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Categories Section End -->
+    <!-- Breadcrumb Section End -->
 
-    <!-- Featured Section Begin -->
-    <section class="featured spad">
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Featured Product</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
-                        </ul>
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Products</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="img/cart/cart-1.jpg" alt="">
+                                        <h5>Vegetable’s Package</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        $55.00
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="1">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        $110.00
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="img/cart/cart-2.jpg" alt="">
+                                        <h5>Fresh Garden Vegetable</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        $39.00
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="1">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        $39.99
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="img/cart/cart-3.jpg" alt="">
+                                        <h5>Organic Bananas</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        $69.00
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="1">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        $69.99
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <section class="featured spad">
-        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Electronics Product</h2>
+                    <div class="shoping__cart__btns">
+                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                            Upadate Cart</a>
                     </div>
-                    <div class="featured__controls">
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>Discount Codes</h5>
+                            <form action="#">
+                                <input type="text" placeholder="Enter your coupon code">
+                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>Cart Total</h5>
                         <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
+                            <li>Subtotal <span>$454.98</span></li>
+                            <li>Total <span>$454.98</span></li>
                         </ul>
+                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
-            </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
     </section>
-    <section class="featured spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Books</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <section class="featured spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Clothing</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <!-- Featured Section End -->
-
-    <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-1.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
-
-    <!-- Latest Product Section Begin -->
-    <!-- Latest Product Section End -->
-
-    <!-- Blog Section Begin -->
-    <!-- Blog Section End -->
+    <!-- Shoping Cart Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -386,6 +323,14 @@
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Our Sitemap</a></li>
                         </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
@@ -397,15 +342,24 @@
                             <button type="submit" class="site-btn">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <!-- Footer Section End -->
@@ -419,7 +373,6 @@
     <script src="/static/js/mixitup.min.js"></script>
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/main.js"></script>
-
 
 
 </body>
