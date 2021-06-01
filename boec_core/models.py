@@ -65,11 +65,37 @@ class Order(models.Model):
     customer = models.ForeignKey('User', models.CASCADE, related_name="customer", db_column='UserID')
     sale = models.ForeignKey('User', models.CASCADE,related_name="sale", db_column='SellerID', null=True)
     payment_type =  models.CharField(db_column='Payment_type', max_length=255, blank=True, null=True)
+    status = models.SmallIntegerField(
+        null=False,
+        blank=False,
+        default=ShippingStatus.DANG_XU_LY.value,
+        choices=[
+            (ShippingStatus.DANG_XU_LY.value, ShippingStatus.DANG_XU_LY.name),
+            (ShippingStatus.DA_TIEP_NHAN.value, ShippingStatus.DA_TIEP_NHAN.name),
+            (ShippingStatus.DANG_LAY_HANG.value, ShippingStatus.DANG_LAY_HANG.name),
+            (ShippingStatus.DANG_GIAO_HANG.value, ShippingStatus.DANG_GIAO_HANG.name),
+            (ShippingStatus.DA_GIAO.value, ShippingStatus.DA_GIAO.name),
+            (ShippingStatus.HUY.value, ShippingStatus.HUY.name)
+        ]
+    )
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
 
-class ShippingInfo(models.Model):
+class OrderStatus(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    status = models.IntegerField(default=0)
+    status = models.SmallIntegerField(
+        null=False,
+        blank=False,
+        default=ShippingStatus.DANG_XU_LY.value,
+        choices=[
+            (ShippingStatus.DANG_XU_LY.value, ShippingStatus.DANG_XU_LY.name),
+            (ShippingStatus.DA_TIEP_NHAN.value, ShippingStatus.DA_TIEP_NHAN.name),
+            (ShippingStatus.DANG_LAY_HANG.value, ShippingStatus.DANG_LAY_HANG.name),
+            (ShippingStatus.DANG_GIAO_HANG.value, ShippingStatus.DANG_GIAO_HANG.name),
+            (ShippingStatus.DA_GIAO.value, ShippingStatus.DA_GIAO.name),
+            (ShippingStatus.HUY.value, ShippingStatus.HUY.name)
+        ]
+    )
+    order = models.ForeignKey('Order', models.CASCADE, db_column='OrderId')
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
 
 class CustomerReview(models.Model):
@@ -79,3 +105,15 @@ class CustomerReview(models.Model):
     customer = models.ForeignKey('User', models.CASCADE, db_column='UserID')
     product = models.ForeignKey('ProductVariant', models.CASCADE, db_column='VariantId')
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
+
+class ShippingDepartment(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
+
+class OrderShip(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    order = models.ForeignKey('Order', models.CASCADE, db_column='OrderId')
+    ship = models.ForeignKey('ShippingDepartment', models.CASCADE, db_column='ShipId')
+    price = models.FloatField(db_column='Price')  # Field name made lowercase.\
+    estimated_arrival = models.DateTimeField(db_column="estimated_arrival", null=True)
