@@ -7,5 +7,5 @@ def index(request):
     return render(request,"common/index.html")
 
 def oders(request):
-    oders = [1,2,3,4,5,6]
-    return render(request, "common/oders.html", {"oders":oders} )
+    list_Order = Order.objects.all()
+    return render(request, "common/oders.html", {"oders":list_Order} )

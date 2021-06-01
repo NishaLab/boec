@@ -215,19 +215,19 @@
                                         {% for item in oders %}                    
                                     <tr>
                                         <td>
-                                            7435
+                                            {{item.id}}
                                         </td>
                                         <td>
-                                            Customer example
+                                            {{item.customer}}
                                         </td>
                                         <td>
-                                            $750.00
+                                            {{item.price}}
                                         </td>
                                         <td>
-                                            04/04/2015
+                                            {{item.create_at}}
                                         </td>
                                         <td>
-                                            14/05/2015
+                                            {{item.create_at}}
                                         </td>
                                         <td>
                                             <span class="label label-primary">Pending</span>
