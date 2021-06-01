@@ -13,8 +13,13 @@ class CustomerIndexView(RoleRequiredView):
     def update_get_context(self, request, *args, **kwargs):
         user = request.user
         featured_products = ProductVariant.objects.filter(is_selling=True, is_feature=True)[:6]
+        if 'cart' not in request.session:
+            cart = []
+        else:
+            cart = request.session['cart']
         self.context["user"] = user
         self.context["featured_products"] = featured_products
+        self.context["cart"] = len(cart)
         return super().update_get_context(request, *args, **kwargs)
 
 class CartView(RoleRequiredView):
@@ -28,4 +33,8 @@ class CartView(RoleRequiredView):
     def update_get_context(self, request, *args, **kwargs):
         user = request.user
         self.context["user"] = user
+        if 'cart' not in request.session:
+            cart = {}
+        else:
+            cart = request.session['cart']
         return super().update_get_context(request, *args, **kwargs)
