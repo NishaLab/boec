@@ -19,6 +19,7 @@ class User(AbstractUser):
     address = models.CharField(db_column='address', max_length=100, default="")
     phone = models.CharField(db_column='phone', max_length=100, default="")
     status = models.CharField(db_column='status', max_length=100, default="Available")
+    email = models.CharField(db_column='email', max_length=100, default="")
 
 class Vendor(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -62,7 +63,7 @@ class OrderedProduct(models.Model):
 class Order(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     shipping_address = models.CharField(db_column='ShippingAddress', max_length=255, blank=True, null=True)
-    customer = models.ForeignKey('User', models.CASCADE, related_name="customer", db_column='UserID')
+    customer = models.ForeignKey('User', models.CASCADE, related_name="customer", db_column='UserID', blank=True, null=True)
     sale = models.ForeignKey('User', models.CASCADE,related_name="sale", db_column='SellerID', null=True)
     payment_type =  models.CharField(db_column='Payment_type', max_length=255, blank=True, null=True)
     status = models.SmallIntegerField(
@@ -80,6 +81,11 @@ class Order(models.Model):
     )
     amount = models.FloatField(db_column='Amount', blank=True, default=0)  
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
+    recv_name =  models.CharField(db_column='rcv_name', max_length=255, blank=True, null=True)
+    recv_city =  models.CharField(db_column='rcv_city', max_length=255, blank=True, null=True)
+    recv_phone =  models.CharField(db_column='rcv_phone', max_length=255, blank=True, null=True)
+    recv_email =  models.CharField(db_column='rcv_email', max_length=255, blank=True, null=True)
+    note =  models.CharField(db_column='note', max_length=255, blank=True, null=True)
 
 class OrderStatus(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.

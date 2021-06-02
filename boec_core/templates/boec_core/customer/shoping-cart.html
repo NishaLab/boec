@@ -11,7 +11,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BoEC | Template</title>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
@@ -69,18 +68,18 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="./customer"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Trang chủ</a></li>
+                            <li class="active"><a href="./customer">Trang chủ</a></li>
                             <li><a href="./shop-grid.html">Shop</a></li>
                             <li><a href="#">Trang</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart">Cart</a></li>
+                                    <li><a href="./shoping-cart">Cart</a></li>
                                     <li><a href="./checkout">Check out</a></li>
                                 </ul>
                             </li>
@@ -91,8 +90,8 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li>
-                            <li><a href="./shopping-cart"><i class="fa fa-shopping-bag"></i> <span id="cart_item_count">{{ cart }}</span></a></li>
-                        </ul>   
+                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>{{ cart }}</span></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -104,7 +103,7 @@
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -142,198 +141,109 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="/static/images/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
 
-    <!-- Categories Section Begin -->
-    <!-- Categories Section End -->
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Shopping Cart</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./customer">Home</a>
+                            <span>Shopping Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
 
-    <!-- Featured Section Begin -->
-    <section class="featured spad">
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Featured Product</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
-                        </ul>
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cart_item in cart_items %}
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="/static/images/variant/{{cart_item.id}}.jpg" width="300" height="200" alt="">
+                                        <h5>{{ cart_item.product.name }}</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        {{ cart_item.price }}
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="{{ cart_item.quantity }}">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        {{ cart_item.total }}
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close"></span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a onclick="addProductToCart(this)" data-variant_id ="{{featured_product.id}}"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <section class="featured spad">
-        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Electronics Product</h2>
+                    <div class="shoping__cart__btns">
+                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                            Upadate Cart</a>
                     </div>
-                    <div class="featured__controls">
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>Discount Codes</h5>
+                            <form action="#">
+                                <input type="text" placeholder="Enter your coupon code">
+                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>Đơn giá</h5>
                         <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
+                            <!-- <li>Subtotal <span>{{ total }}</span></li> -->
+                            <li>Thành tiền <span>{{ total }}</span></li>
                         </ul>
+                        <a href="./checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
-            </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a onclick="addProductToCart(this)" data-variant_id ="{{featured_product.id}}"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
     </section>
-    <section class="featured spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Books</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a onclick="addProductToCart(this)" data-variant_id ="{{featured_product.id}}"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <section class="featured spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Clothing</h2>
-                    </div>
-                    <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".Electronics">Electronic</li>
-                            <li data-filter=".book">Book</li>
-                            <li data-filter=".clothing">Clothing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                {% for featured_product in featured_products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="/static/images/variant/{{featured_product.id}}.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a onclick="addProductToCart(this)" data-variant_id ="{{featured_product.id}}"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-    <!-- Featured Section End -->
-
-    <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-1.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
-
-    <!-- Latest Product Section Begin -->
-    <!-- Latest Product Section End -->
-
-    <!-- Blog Section Begin -->
-    <!-- Blog Section End -->
+    <!-- Shoping Cart Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -342,7 +252,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="./customer"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -373,15 +283,24 @@
                             <button type="submit" class="site-btn">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <!-- Footer Section End -->
@@ -396,22 +315,7 @@
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/main.js"></script>
 
-    <script>
-        function addProductToCart(elem) {
-            var id = $(elem).data("variant_id");
-            $.ajax({
-            type: "POST",
-            data: {id: id},
-            url: "/api/cart/add_product_to_cart",
-            success: function (data) {
-                if(data.is_new){
-                    var count = parseInt($("#cart_item_count").text().trim());
-                    $("#cart_item_count").text(count+1)
-                }
-            }
-            })
-        }
-    </script>
+
 </body>
 
 </html>
