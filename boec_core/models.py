@@ -78,6 +78,7 @@ class Order(models.Model):
             (ShippingStatus.HUY.value, ShippingStatus.HUY.name)
         ]
     )
+    amount = models.FloatField(db_column='Amount', blank=True, default=0)  
     create_at = models.DateTimeField(db_column="create_at", auto_now=True)
 
 class OrderStatus(models.Model):
@@ -117,3 +118,8 @@ class OrderShip(models.Model):
     ship = models.ForeignKey('ShippingDepartment', models.CASCADE, db_column='ShipId')
     price = models.FloatField(db_column='Price')  # Field name made lowercase.\
     estimated_arrival = models.DateTimeField(db_column="estimated_arrival", null=True)
+
+class Favorite(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    customer = models.ForeignKey('User', models.CASCADE, db_column='UserID')
+    product = models.ForeignKey('ProductVariant', models.CASCADE, db_column='VariantId')
