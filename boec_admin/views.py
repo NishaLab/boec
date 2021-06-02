@@ -18,7 +18,7 @@ def oders(request):
     return render(request, "common/oders.html", {"oders":list_Order,"amount":list_Amount} )
 
 def detailOrder(request,order_id):
-    order = Order.objects.get(pk = order_id)
+    order = Order.objects.filter(id = order_id)
     products = OrderedProduct.objects.filter(order = order_id)
     return render(request, 'common/detail_order.html',{'products':products, 'order':order})
     
