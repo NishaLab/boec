@@ -150,11 +150,12 @@
 
                 <div class="ibox">
                     <div class="ibox-title">
-                        <span class="float-right">(<strong>5</strong>) items</span>
+                        <span class="float-right">(<strong>{{products.count}}</strong>) items</span>
                         <h5>Items in your cart</h5>
                     </div>
                     
                     <!-- View Item -->
+                    {% for product in products %}
                     <div class="ibox-content">
                         <div class="table-responsive">
                             <table class="table shoping-cart-table">
@@ -168,7 +169,7 @@
                                     <td class="desc">
                                         <h3>
                                             <a href="#" class="text-navy">
-                                                Photo editor
+                                                {{product.product.product.name}}
                                             </a>
                                         </h3>
                                         <p class="small">
@@ -187,14 +188,15 @@
                                     </td>
 
                                     <td>
-                                        $700,00
+                                        {{product.price}}
                                     </td>
                                     <td width="65">
-                                        <input type="text" class="form-control" placeholder="1">
+                                        <input type="text" class="form-control" placeholder="{{product.quantity}}">
                                     </td>
                                     <td>
                                         <h4>
-                                            $70,00
+                                            {% load admin_extras %}
+                                            {{ product.price|mul:product.quantity }}
                                         </h4>
                                     </td>
 
@@ -204,6 +206,8 @@
                         </div>
 
                     </div>
+
+                    {% endfor %}
                     <div class="ibox-content">
 
                         <button class="btn btn-primary float-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
