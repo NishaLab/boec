@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from boec_core.models import *
 
@@ -24,7 +24,8 @@ def detailOrder(request,order_id):
     oders = [1,2,3,4,5,6]
     return render(request, "common/oders.html", {"oders":oders} )
 def productlist(request):
-    return render(request, "common/productlist.html" )
+    products = Product.objects.all()
+    return render(request, "common/productlist.html",{'products':products})
 
 def addProduct(request):
     name= request.GET['product_name']
@@ -36,4 +37,8 @@ def addProduct(request):
     category= Category( name='dien tu', desc='dat')
     category.save()
     Product.objects.create(name=name, desc = discription,category= category)
-    return render(request, "common/productlist.html" )
+    data = Product.objects.all()
+    return redirect('productlist')
+
+def editProduct(request):
+    

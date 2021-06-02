@@ -23,7 +23,7 @@ urlpatterns = (
     [
         path('register/', admin.site.urls),
         path('', include('boec_core.urls')),
-        path('boec_admin/', include('boec_admin.urls'))
+        path('', include('boec_admin.urls'))
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
