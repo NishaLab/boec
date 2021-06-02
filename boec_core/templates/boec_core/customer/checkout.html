@@ -30,6 +30,8 @@
         <div class="loader"></div>
     </div>
 
+    <!-- Humberger Begin -->
+    <!-- Humberger End -->
 
     <!-- Header Section Begin -->
     <header class="header">
@@ -79,7 +81,7 @@
                             <li><a href="#">Trang</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart">Cart</a></li>
+                                    <li><a href="./shopping-cart">Cart</a></li>
                                     <li><a href="./checkout">Check out</a></li>
                                 </ul>
                             </li>
@@ -90,7 +92,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li>
-                            <li><a href="./shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>{{ cart }}</span></a></li>
+                            <li><a href="./shopping-cart"><i class="fa fa-shopping-bag"></i> <span>{{ cart }}</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -148,15 +150,15 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg">
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Shopping Cart</h2>
+                        <h2>Checkout</h2>
                         <div class="breadcrumb__option">
                             <a href="./customer">Home</a>
-                            <span>Shopping Cart</span>
+                            <span>Checkout</span>
                         </div>
                     </div>
                 </div>
@@ -165,85 +167,95 @@
     </section>
     <!-- Breadcrumb Section End -->
 
-    <!-- Shoping Cart Section Begin -->
-    <section class="shoping-cart spad">
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12">
-                    <div class="shoping__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="shoping__product">Sản phẩm</th>
-                                    <th>Đơn giá</th>
-                                    <th>Số lượng</th>
-                                    <th>Thành tiền</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for cart_item in cart_items %}
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="/static/images/variant/{{cart_item.id}}.jpg" width="300" height="200" alt="">
-                                        <h5>{{ cart_item.product.name }}</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        {{ cart_item.price }}
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="{{ cart_item.quantity }}">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        {{ cart_item.total }}
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                    </h6>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
-                            </form>
+            </div> -->
+            <div class="checkout__form">
+                <h4>Billing Details</h4>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="checkout__input">
+                                <p>Tên Người nhận<span>*</span></p>
+                                <input type="text" name="name"  value="{{user.last_name}}, {{user.first_name}}">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Địa chỉ nhận hàng<span>*</span></p>
+                                <input type="text" name="address" placeholder="Apartment, suite, unite ect (optinal)" value="{{user.address}}">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Thành phố<span>*</span></p>
+                                <input type="text"  name="city">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Số điện thoại người nhận<span>*</span></p>
+                                        <input type="text" name="phone"value="{{user.phone}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email người nhận<span>*</span></p>
+                                        <input type="text" name="email" value="{{user.first_name}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Chú thích<span>*</span></p>
+                                <input type="text" name="note"
+                                    placeholder="Notes about your order, e.g. special notes for delivery.">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>Đơn hàng của bạn</h4>
+                                <div class="checkout__order__products">Sản phẩm <span>Thành tiền</span></div>
+                                <ul>
+                                    {% for cart_item in cart_items %}
+                                    <li> {{cart_item.product.name}} <span>{{cart_item.total}}</span></li>
+                                    {% endfor %}
+
+                                </ul>
+                                <!-- <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div> -->
+                                <div class="checkout__order__total">Thành tiền <span>{{total}}</span></div>
+                                <!-- <div class="checkout__input__checkbox">
+                                    <label for="acc-or">
+                                        Create an account?
+                                        <input type="checkbox" id="acc-or">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div> -->
+                                <!-- <div class="checkout__input__checkbox">
+                                    <label for="payment">
+                                        Check Payment
+                                        <input type="checkbox" id="payment">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div> -->
+                                <!-- <div class="checkout__input__checkbox">
+                                    <label for="paypal">
+                                        Paypal
+                                        <input type="checkbox" id="paypal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div> -->
+                                <button type="submit" class="site-btn">Chốt Đơn</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__checkout">
-                        <h5>Đơn giá</h5>
-                        <ul>
-                            <!-- <li>Subtotal <span>{{ total }}</span></li> -->
-                            <li>Thành tiền <span>{{ total }}</span></li>
-                        </ul>
-                        <a href="./checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </section>
-    <!-- Shoping Cart Section End -->
+    <!-- Checkout Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -271,6 +283,14 @@
                             <li><a href="#">Delivery infomation</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
                         </ul>
                     </div>
                 </div>
@@ -315,6 +335,7 @@
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/main.js"></script>
 
+ 
 
 </body>
 

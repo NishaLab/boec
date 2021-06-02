@@ -9,6 +9,7 @@ urlpatterns = [
     path('boec/admin', views.AdminIndexView.as_view(), name="login"),
     path('boec/customer', views.CustomerIndexView.as_view(), name="main_customer"),
     path('boec/shopping-cart', views.CartView.as_view(), name="cart_view"),
+    path('boec/checkout', views.CheckoutView.as_view(), name="checkout"),
     path('api/cart/add_product_to_cart', views.add_product_to_cart, name='add_product_to_cart'),
 
     path('', views.Index.as_view(), name='index')
