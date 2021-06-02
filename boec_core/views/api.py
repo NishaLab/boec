@@ -26,3 +26,21 @@ def add_product_to_cart(request):
       "cart": cart,
       "is_new": is_new,
   })
+@csrf_exempt
+def add_product_to_favorite(request):
+  product = ProductVariant.objects.get(pk=request.POST.get('id'))
+  user = User.objects.get(pk=request.POST.get('user'))
+  try:
+    fav = Favorite.objects.get(product=product,customer=user)
+    is_exist = True
+    fav.delete()
+  except:
+    is_exist = False
+    fav = Favorite(product=product,customer=user)
+    fav.save()
+
+
+  return JsonResponse({
+      "msg": "Success",
+      "is_exist": is_exist,
+  })
