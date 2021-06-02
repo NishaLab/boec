@@ -41,4 +41,4 @@ def addProduct(request):
     return redirect('productlist')
 
 def editProduct(request):
-    
+    return render(request, "common/productEdit.html")
