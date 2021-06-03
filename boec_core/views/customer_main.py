@@ -65,6 +65,41 @@ class FavoriteView(View):
         context["cart"] = len(cart)
         return render(request, "boec_core/customer/favorite.html",context)
 
+class VariantDetailView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        user = request.user
+        variant_id = kwargs.get('variant_id')
+        variant = ProductVariant.objects.get(pk=variant_id)
+        reviews = CustomerReview.objects.filter(product=variant)
+        recommend_products = ProductVariant.objects.filter(is_selling=True, is_feature=True)[:6]
+        if 'cart' not in request.session:
+            cart = []
+        else:
+            cart = request.session['cart']
+        if user.is_authenticated:
+            context["user_id"] = user
+            context["favorite"] = Favorite.objects.filter(customer=user).count()
+        rating = 0
+        for review in reviews:
+            rating += review.rating
+        
+        if reviews.count() == 0:
+            rating = 0
+            context["is_float"] = False
+        else:
+            rating = rating/reviews.count()
+            if(rating%1!=0):
+                context["is_float"] = True
+        context["cart"] = len(cart)
+        context["variant"] = variant
+        context["reviews"] = reviews
+        context["ratings"] = int(rating)
+        context["max_rating"] = [1,2,3,4,5]
+        context["current_rating"] = [1] * int(rating)
+        return render(request, "boec_core/customer/shop-details.html",context)
+
+
 class CheckoutView(View):
     def post(self, request, *args, **kwargs):
         user = request.user
