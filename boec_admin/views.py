@@ -25,20 +25,50 @@ def detailOrder(request,order_id):
     return render(request, "common/oders.html", {"oders":oders} )
 def productlist(request):
     products = Product.objects.all()
-    return render(request, "common/productlist.html",{'products':products})
+    categorys = Category.objects.all()
+    sub_categorys = SubCategory.objects.all()
+    return render(request, "common/productlist.html",{'products':products,'categorys':categorys,'sub_categorys':sub_categorys})
 
 def addProduct(request):
     name= request.GET['product_name']
     price = request.GET['price']
     quantity = request.GET['quantity']
-    status = request.GET['status']
+    id_ca = request.GET['category']
+    id_sub = request.GET['subcategory']
+    category = Category.objects.get(id=id_ca)
+    sub = SubCategory.objects.get(id=id_sub)
     discription =request.GET['disscription']
-
     category= Category( name='dien tu', desc='dat')
     category.save()
-    Product.objects.create(name=name, desc = discription,category= category)
+    Product.objects.create(name=name, desc = discription,category= category,sub_category=sub)
     data = Product.objects.all()
     return redirect('productlist')
 
-def editProduct(request):
-    return render(request, "common/productEdit.html")
+def deleteProduct(request,product_id):
+
+    Product.objects.get(id=product_id).delete()
+    return redirect('productlist')
+
+def editProduct(request,product_id):
+    if request.method == 'POST':
+        id = request.POST['id']
+        product = Product.objects.get(id=id)
+        name = request.POST['name']
+        desc = request.POST['description']
+        id_category = request.POST['category']
+        category = Category.objects.get(id=id_category)
+        id_sub = request.POST['subcategory']
+        sub = SubCategory.objects.get(id=id_sub)
+        product.name = name
+        product.desc = desc
+        product.category = category
+        product.sub_category = sub
+        product.save()
+        return redirect('productlist')
+
+
+
+    product = Product.objects.get(id=product_id)
+    categorys = Category.objects.all()
+    sub_categorys = SubCategory.objects.all()
+    return render(request, "common/productEdit.html",{'product':product,'categorys':categorys,'sub_categorys':sub_categorys})
