@@ -12,106 +12,17 @@
         </form>
     </div>
         <ul class="nav navbar-top-links navbar-right">
-            <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-            </li>
+            
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                </a>
-                <ul class="dropdown-menu dropdown-messages">
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a class="dropdown-item float-left" href="profile.html">
-                                <img alt="image" class="rounded-circle" src="img/a7.jpg">
-                            </a>
-                            <div class="media-body">
-                                <small class="float-right">46h ago</small>
-                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a class="dropdown-item float-left" href="profile.html">
-                                <img alt="image" class="rounded-circle" src="img/a4.jpg">
-                            </a>
-                            <div class="media-body ">
-                                <small class="float-right text-navy">5h ago</small>
-                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li>
-                        <div class="dropdown-messages-box">
-                            <a class="dropdown-item float-left" href="profile.html">
-                                <img alt="image" class="rounded-circle" src="img/profile.jpg">
-                            </a>
-                            <div class="media-body ">
-                                <small class="float-right">23h ago</small>
-                                <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li>
-                        <div class="text-center link-block">
-                            <a href="mailbox.html" class="dropdown-item">
-                                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+                </a>      
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="mailbox.html" class="dropdown-item">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                <span class="float-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li>
-                        <a href="profile.html" class="dropdown-item">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="float-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li>
-                        <a href="grid_options.html" class="dropdown-item">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="float-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li>
-                        <div class="text-center link-block">
-                            <a href="notifications.html" class="dropdown-item">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+                </a>               
             </li>
-
-
             <li>
                 <a href="login.html">
                     <i class="fa fa-sign-out"></i> Log out
@@ -209,9 +120,7 @@
 
                     {% endfor %}
                     <div class="ibox-content">
-
-                        <button class="btn btn-primary float-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
-                        <button class="btn btn-white"><i class="fa fa-arrow-left"></i> Back</button>
+                        <button class="btn btn-white"><i class="fa fa-arrow-left"></i> <a href="{% url 'list_order' %}">Back</a></button>
 
                     </div>
                 </div>
@@ -233,14 +142,76 @@
 
                         <hr/>
                         <span class="text-muted small">
-                            Text 
+                            <h2>
+                                {{order.0.recv_name}}
+                            </h2>
+                            <ul class="list-unstyled m-t-md">
+                                <li>
+                                    <span class="fa fa-envelope m-r-xs"></span>
+                                    <label>Email:</label>
+                                    {{order.0.recv_email}}
+                                </li>
+                                <li>
+                                    <span class="fa fa-home m-r-xs"></span>
+                                    <label>Address:</label>
+                                    {{order.0.recv_city}}
+                                </li>
+                                <li>
+                                    <span class="fa fa-phone m-r-xs"></span>
+                                    <label>Contact:</label>
+                                    {{order.0.recv_phone}}
+                                </li>
+                                <li>
+                                    <span class="fa fa-phone m-r-xs"></span>
+                                    <label>Note:</label>
+                                    {{order.0.note}}
+                                </li>
+                                <form action="{% url 'changeStatus' order.0.id%}" method="post">
+                                    {% csrf_token %}
+                                <ul class="todo-list m-t">
+                                    <li>
+                                        <input type="radio" value="1" name="choice" class="i-checks" {% if order.0.status == 1 %} checked {% endif %}/>
+                                        <span class="m-l-xs">Đang xử lý</span>
+                                        
+                                    </li>
+                                    <li>
+                                        <input type="radio" value="2" name="choice" class="i-checks" {% if order.0.status == 2 %} checked {% endif %}/>
+                                        <span class="m-l-xs">Đã tiếp nhận</span>
+                                        
+                                    </li>
+                                    <li>
+                                        <input type="radio" value="3" name="choice" class="i-checks"  {% if order.0.status == 3 %} checked {% endif %}/>
+                                        <span class="m-l-xs">Đang lấy hàng</span>
+                                       
+                                    </li>
+                                    <li>
+                                        <input type="radio" value="4" name="choice" class="i-checks"  {% if order.0.status == 4 %} checked {% endif %}/>
+                                        <span class="m-l-xs">Đang giao hàng</span>
+                                        
+                                    </li>
+                                    <li>
+                                        <input type="radio" value="5" name="choice" class="i-checks"  {% if order.0.status == 5 %} checked {% endif %}/>
+                                        <span class="m-l-xs">Đã giao</span>
+                                        
+                                    </li>
+                                    <li>
+                                        <input type="radio" value="6" name="choice" class="i-checks"  {% if order.0.status == 6 %} checked {% endif %}/>
+                                        <span class="m-l-xs">Huỷ</span>
+                                        
+                                    </li>
+                                </ul>
+
+                            </ul>
+
                         </span>
                         <div class="m-t-sm">
                             <div class="btn-group">
-                            <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Checkout</a>
-                            <a href="#" class="btn btn-white btn-sm"> Cancel</a>
+                            <input type='submit' value="Checkout" class='btn btn-primary btn-sm'>
+                            <a href="{% url 'list_order' %}" class="btn btn-white btn-sm"> Cancel</a>
+                            
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
 
@@ -250,4 +221,5 @@
         </div>
     </div>
     </div>
+    
 {% endblock %}
