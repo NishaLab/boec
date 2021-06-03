@@ -31,62 +31,6 @@
     </div>
 
     <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
-        </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
-        </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
-            </ul>
-        </div>
-    </div>
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
@@ -94,34 +38,41 @@
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><i class="fa fa-envelope"></i> boec@ptit.com</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
                             </div>
-                            <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
-                            <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
-                            </div>
+                            {% if user_id %}
+                                <div class="header__top__right__language">
+                                    <div href="#"><i class="fa fa-user"></i> {{ user.first_name}},{{ user.last_name }}</div>
+                                    <span class="arrow_carrot-down"></span>
+                                    <ul>
+                                        <li><a href="/user/logout">Log Out</a></li>
+                                        <li><a href="#">Edit Profile</a></li>
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <div class="header__top__right__language">
+                                    <div href="#"><i class="fa fa-user"></i> Login </div>
+                                    <span class="arrow_carrot-down"></span>
+                                    <ul>
+                                        <li><a href="/user/login">Log In</a></li>
+                                        <li><a href="#">Register</a></li>
+                                    </ul>   
+                                </div>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -131,34 +82,32 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="/boec/customer"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="active"><a href="/boec/customer">Trang chủ</a></li>
+                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li><a href="#">Trang</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="/boec/shop-details.html">Shop Details</a></li>
+                                    <li><a href="/boec/shopping-cart">Cart</a></li>
+                                    <li><a href="/boec/checkout">Check out</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                            {% if user_id %}
+                                <li><a href="/boec/favourite"><i class="fa fa-heart"></i> <span id="favorite_item_count">{{ favorite }}</span></a></li>
+                            {% endif %}
+                            <li><a href="/boec/shopping-cart"><i class="fa fa-shopping-bag"></i> <span id="cart_item_count">{{ cart }}</span></a></li>
+                        </ul>   
                     </div>
                 </div>
             </div>
@@ -177,20 +126,12 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>Các Loại Mặt Hàng</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <li><a href="#">Sách</a></li>
+                            <li><a href="#">Đồ điện tử</a></li>
+                            <li><a href="#">Quần Áo</a></li>
                         </ul>
                     </div>
                 </div>
@@ -223,22 +164,6 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Vegetable’s Package</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <a href="./index.html">Vegetables</a>
-                            <span>Vegetable’s Package</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Breadcrumb Section End -->
 
     <!-- Product Details Section Begin -->
@@ -249,56 +174,49 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="img/product/details/product-details-1.jpg" alt="">
-                        </div>
-                        <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                src="img/product/details/thumb-1.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                src="img/product/details/thumb-2.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                src="img/product/details/thumb-3.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                src="img/product/details/thumb-4.jpg" alt="">
+                                src="/static/images/variant/{{variant.id}}.jpg" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>Vetgetable’s Package</h3>
+                        <h3>{{variant.product.name}}</h3>
                         <div class="product__details__rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                        {%for n in current_rating%}
+                                <i  onclick="rateProduct(this)" class="fas fa-star" style="color:#EDBB0E;" data-rating="1"></i>
+                        {%endfor%}                     
+                        {% if is_float %}
+                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                        {% endif %}
+                            <span>({{reviews.count}} reviews)</span>
                         </div>
-                        <div class="product__details__price">$50.00</div>
-                        <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-                            vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                            quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+                        <div class="product__details__price">{{variant.price}}</div>
+                        <p>{{variant.product.desc}}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="number" id ="quantity" value="1">
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <a onclick="addProductToCart(this)" data-variant_id ="{{variant.id}}" class="primary-btn">ADD TO CARD</a>
+                        {% if user_id %}
+                            <a class="heart-icon" onclick="addProductToFavorite(this)" data-variant_id ="{{variant.id}}" data-user_id ="{{user_id.id}}"><span class="icon_heart_alt"></span></a>
+                        {% endif %}
                         <ul>
-                            <li><b>Availability</b> <span>In Stock</span></li>
-                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
-                            <li><b>Share on</b>
+                            {% if variant.quantity > 0 %}
+                                <li><b>Availability</b> <span>In Stock</span></li>
+                            {% else %}
+                                <li><b>Availability</b> <span>Out of Stock</span></li>
+                            {% endif %}
+                            <!-- <li><b>Share on</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
                                     <a href="#"><i class="fa fa-instagram"></i></a>
                                     <a href="#"><i class="fa fa-pinterest"></i></a>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -307,22 +225,44 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                    aria-selected="true">Description</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                    aria-selected="false">Reviews</a>
+                                    aria-selected="true">Reviews</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <div class="product__details__tab__desc">
                                     <h6>Review</h6>
+                                    {% if user_id %}
+                                        <div>
+                                            <div class="star-rating d-inline-block" id="rating_block">
+                                                <i  onclick="rateProduct(this)" class="far fa-star" style="color:#EDBB0E;" data-rating="1"></i>
+                                                <i  onclick="rateProduct(this)" class="far fa-star" style="color:#EDBB0E;" data-rating="2"></i>
+                                                <i  onclick="rateProduct(this)" class="far fa-star" style="color:#EDBB0E;" data-rating="3"></i>
+                                                <i  onclick="rateProduct(this)" class="far fa-star" style="color:#EDBB0E;" data-rating="4"></i>
+                                                <i  onclick="rateProduct(this)" class="far fa-star" style="color:#EDBB0E;" data-rating="5"></i>
+                                            </div>
+                                            <textarea style="margin-top:5px;" class="form-control" rows="3" id="comment" placeholder="Write Something"></textarea>
+                                            <button id="result-4" data-variant_id="{{variant.id}}" data-user_id="{{user_id.id}}" type="button" onclick="newComment(this)" style="margin-top:10px;margin-left:5px;"
+                                            class="btn btn-success">Comment</button>
+                                        </div>
+                                    {% endif %}
+                                    <div class="commment-area" style="margin-top:24px; border-top: solid 1px black;">
+                                        {% for review in reviews %}
+                                        <div style="border-bottom: solid 1px black; padding: 8px 0px 8px 0px;">
+                                            <div class="star-rating d-inline-block">
+                                                {%for n in max_rating%}
+                                                    {% if review.rating >= n %}
+                                                        <i  class="fas fa-star" style="color:#EDBB0E;" data-rating="1"></i>
+                                                    {% else %}
+                                                        <i  class="far fa-star" style="color:#EDBB0E;" data-rating="1"></i>
+                                                    {% endif %}
+                                                {%endfor%}
+                                            </div>
+                                            <textarea style="margin-top:5px;" class="form-control" disabled rows="3" id="comment" placeholder="Write Something"> {{review.content}} </textarea>
+                                        </div>
+
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -346,52 +286,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-                            <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                            <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-                            <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
+                        <div class="product__item__pic set-bg">
                             <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -416,7 +311,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="./index.html"></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -463,16 +358,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </footer>
     <!-- Footer Section End -->
@@ -487,6 +373,72 @@
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/main.js"></script>
 
+    <script>
+        function addProductToCart(elem) {
+            var id = $(elem).data("variant_id");
+            var quantity = $("#quantity").val();
+            $.ajax({
+            type: "POST",
+            data: {id: id, quantity: quantity},
+            url: "/api/cart/add_product_to_cart",
+            success: function (data) {
+                if(data.is_new){
+                    var count = parseInt($("#cart_item_count").text().trim());
+                    $("#cart_item_count").text(count+1)
+                }
+            }
+            })
+        }
+        function addProductToFavorite(elem) {
+            var id = $(elem).data("variant_id");
+            var user = $(elem).data("user_id");
+            $.ajax({
+            type: "POST",
+            data: {id: id, user: user},
+            url: "/api/favorite/add_product_to_favorite",
+            success: function (data) {
+                if(data.is_exist){
+                    var count = parseInt($("#favorite_item_count").text().trim());
+                    $("#favorite_item_count").text(count - 1);
+                }else{
+                    var count = parseInt($("#favorite_item_count").text().trim());
+                    $("#favorite_item_count").text(count + 1);
+                }
+            }
+            })
+        }
+        function rateProduct(elem) {
+            var parent = $("#rating_block");
+            var star_child = $("#rating_block").children("i");
+            for (let index = 0; index < star_child.length; index++) {
+                const element = star_child[index];
+                if(index <= $(elem).index()){
+                    $(element).removeClass("far")
+                    $(element).addClass("fas")
+                    $(element).addClass("checked")
+
+                }else{
+                    $(element).removeClass("fas")
+                    $(element).addClass("far")
+                    $(element).removeClass("checked")
+                }
+            }
+        }
+        function newComment(elem) {
+            var id = $(elem).data("variant_id");
+            var user = $(elem).data("user_id");
+            var rating = $(".star-rating").children(".checked").length;
+            var comment = $("#comment").val();
+            $.ajax({
+            type: "POST",
+            data: {id: id, user: user, rating: rating, comment: comment},
+            url: "/api/review/add_review",
+            success: function (data) {
+                location.reload();
+            }
+            })
+        }
+    </script>
 
 </body>
 
