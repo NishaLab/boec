@@ -19,6 +19,7 @@ urlpatterns = [
 
 
     
+    path('edit_profile/',views.edit_profile,name = 'edit_profile'),
     path('signup/',views.signup,name = "signup"),
     path('', views.CustomerIndexView.as_view(), name='index')
 ]

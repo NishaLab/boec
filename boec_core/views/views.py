@@ -10,7 +10,10 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from boec_core.views.signup import SignUpForm
+from boec_core.views.edit_profile import EditProfileForm
+
 from ..models import *
+
 
 class RoleRequiredView(View):
     user_role = None
@@ -43,7 +46,7 @@ class RoleRequiredView(View):
                             "status": "Error",
                             "msg": self.error_messages.get("wrong_role_user")
                         })
-                    
+
                     return func(self, request, *args, **kwargs)
             except Exception as e:
                 return JsonResponse({
@@ -88,7 +91,7 @@ class RoleRequiredView(View):
         self.update_get_context(request, *args, **kwargs)
 
         return render(request, self.template_path, self.context)
-    
+
     @method_decorator(login_required)
     @role_required_decorator
     def post(self, request, *args, **kwargs):
@@ -105,7 +108,9 @@ class RoleRequiredView(View):
             self.update_post_context(request, *args, **kwargs)
         return render(request, self.template_path, self.context)
 
+
 User = get_user_model()
+
 
 def signup(request):
     if request.method == 'POST':
@@ -121,8 +126,21 @@ def signup(request):
         form = SignUpForm()
     return render(request, "boec_core/user_base/signup.html", {'form': form})
 
-    
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('main_customer')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'boec_core/user_base/edit_profile.html', args)
+
+
 def get_user_role_root_path(user):
     if user.role == 2:
-        return "/boec/admin"       
+        return "/boec/admin"
     return "/boec/customer"
