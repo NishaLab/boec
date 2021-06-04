@@ -18,5 +18,8 @@ urlpatterns = [
     path('api/review/add_reply', views.add_reply, name='add_reply'),
 
 
+    
+    path('edit_profile/',views.edit_profile,name = 'edit_profile'),
+    path('signup/',views.signup,name = "signup"),
     path('', views.CustomerIndexView.as_view(), name='index')
 ]
