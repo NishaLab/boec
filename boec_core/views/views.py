@@ -6,7 +6,10 @@ from django.views import View
 from django import forms
 from django.conf import settings
 from django.core.paginator import Paginator
-
+from django.contrib.auth import get_user_model
+from django.shortcuts import redirect
+from django.contrib.auth import login, authenticate
+from boec_core.views.signup import SignUpForm
 from ..models import *
 
 class RoleRequiredView(View):
@@ -102,7 +105,23 @@ class RoleRequiredView(View):
             self.update_post_context(request, *args, **kwargs)
         return render(request, self.template_path, self.context)
 
+User = get_user_model()
 
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('main_customer')
+    else:
+        form = SignUpForm()
+    return render(request, "boec_core/user_base/signup.html", {'form': form})
+
+    
 def get_user_role_root_path(user):
     if user.role == 2:
         return "/boec/admin"       
