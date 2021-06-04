@@ -60,3 +60,14 @@ def add_review(request):
   return JsonResponse({
       "msg": "Success",
   })
+
+@csrf_exempt
+def add_reply(request):
+  review = CustomerReview.objects.get(pk=request.POST.get('id'))
+  user = User.objects.get(pk=request.POST.get('user'))
+  comment = request.POST.get('content')
+  reply = Reply(staff= user, review=review, content= comment)
+  reply.save()
+  return JsonResponse({
+      "msg": "Success",
+  })

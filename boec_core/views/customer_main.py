@@ -83,6 +83,8 @@ class VariantDetailView(View):
         rating = 0
         for review in reviews:
             rating += review.rating
+            replies = Reply.objects.filter(review=review)
+            setattr(review, "replies", replies)
         
         if reviews.count() == 0:
             rating = 0
