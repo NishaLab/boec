@@ -177,10 +177,10 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table_body">
                                 {% for cart_item in cart_items %}
                                 <tr>
-                                    <td class="shoping__cart__item">
+                                    <td class="shoping__cart__item" data-id="{{cart_item.id}}">
                                         <img src="/static/images/variant/{{cart_item.id}}.jpg" width="300" height="200" alt="">
                                         <h5>{{ cart_item.product.name }}</h5>
                                     </td>
@@ -190,7 +190,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="{{ cart_item.quantity }}">
+                                                <input type="text" class ="quant"value="{{ cart_item.quantity }}">
                                             </div>
                                         </div>
                                     </td>
@@ -233,7 +233,7 @@
                             <!-- <li>Subtotal <span>{{ total }}</span></li> -->
                             <li>Thành tiền <span>{{ total }}</span></li>
                         </ul>
-                        <a href="./checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a onclick="checkout(this)" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
@@ -304,6 +304,27 @@
         function searchProduct(elem) {
             var search = $("#search").val();
             window.location.replace(`/boec/shop-grid?search=${search}`)
+        }
+        function checkout(elem) {
+            var parent = $("#table_body").children("tr");
+            var obj = {}
+            for (let index = 0; index < parent.length; index++) {
+                const element = parent[index];
+                var quantity = parseInt($(element).find(".quant").first().val());
+                var id = $(element).find(".shoping__cart__item").first().data("id");
+                obj[`${id}`] = quantity
+            }
+            product_str = Object.keys(obj).join(";")
+            quantity_str = Object.values(obj).join(";")
+
+            $.ajax({
+            type: "POST",
+            data: {product: product_str,quantity: quantity_str },
+            url: "/api/cart/update_cart",
+            success: function (data) {
+                window.location.replace(`/boec/checkout`)
+            }
+            })
         }
     </script>
 

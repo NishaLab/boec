@@ -72,3 +72,17 @@ def add_reply(request):
   return JsonResponse({
       "msg": "Success",
   })
+@csrf_exempt
+def update_cart(request):
+  product = request.POST.get('product')
+  quantity = request.POST.get('quantity')
+  product_arr = product.split(";")
+  quantity_arr = quantity.split(";")
+  cart ={}
+  for index, item in enumerate(product_arr):
+    cart[item] = int(quantity_arr[index])
+  request.session['cart']= cart
+
+  return JsonResponse({
+      "msg": "Success",
+  })
