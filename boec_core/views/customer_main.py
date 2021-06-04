@@ -65,6 +65,25 @@ class FavoriteView(View):
         context["cart"] = len(cart)
         return render(request, "boec_core/customer/favorite.html",context)
 
+class ShopGridView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        user = request.user
+        favorites = Favorite.objects.filter(customer=user)
+        featured_products = []
+        for favorite in favorites:
+            featured_products.append(favorite.product)
+        
+        if 'cart' not in request.session:
+            cart = []
+        else:
+            cart = request.session['cart']
+        if user.is_authenticated:
+            context["user_id"] = user
+            context["favorite"] = Favorite.objects.filter(customer=user).count()
+        context["featured_products"] = featured_products
+        context["cart"] = len(cart)
+        return render(request, "boec_core/customer/favorite.html",context)
 class VariantDetailView(View):
     def get(self, request, *args, **kwargs):
         context = {}

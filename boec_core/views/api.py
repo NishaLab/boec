@@ -7,8 +7,9 @@ import logging
 def add_product_to_cart(request):
   key = request.POST.get('id') + ""
   quant = request.POST.get('quantity')
-  quant = int(quant)
-  if quant is None:
+  try:
+    quant = int(quant)
+  except:
     quant = 1
   is_new = False
   if 'cart' not in request.session:

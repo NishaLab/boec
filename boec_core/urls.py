@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/favorite/add_product_to_favorite', views.add_product_to_favorite, name='add_product_to_favorite'),
     path('api/review/add_review', views.add_review, name='add_review'),
     path('api/review/add_reply', views.add_reply, name='add_reply'),
+    path('boec/shop-grid', views.ShopGridView.as_view(), name="shop_grid"),
 
 
     
