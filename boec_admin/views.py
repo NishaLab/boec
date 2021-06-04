@@ -8,14 +8,8 @@ def index(request):
 
 def oders(request):
     list_Order = Order.objects.all()
-    list_Amount = []
-    for item in list_Order:    
-        list_OrderProduct = OrderedProduct.objects.filter(order = item.id)
-        total = 0
-        for item in list_OrderProduct:
-            total += item.price
-        list_Amount.append(total)
-    return render(request, "common/oders.html", {"oders":list_Order,"amount":list_Amount} )
+    
+    return render(request, "common/oders.html", {"oders":list_Order} )
 
 def detailOrder(request,order_id):
     order = Order.objects.filter(id = order_id)
@@ -128,3 +122,14 @@ def productSearch(request):
     # ,{'productVariant':productVariant,'productName':productName}
     
     return render(request, "common/productlist.html",{'productVars':productVars})
+def editProduct(request):
+    return render(request, "common/productEdit.html")
+
+
+def changeStatusOrder(request, order_id):
+    order = Order.objects.get(pk = order_id)
+    value = request.POST["choice"]
+    order.status = value
+    order.save()
+    listOrder = Order.objects.all() 
+    return render(request, 'common/oders.html', {"oders":listOrder})
