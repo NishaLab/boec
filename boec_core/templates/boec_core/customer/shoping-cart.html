@@ -74,13 +74,13 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./customer">Trang chủ</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li class="active"><a href="/boec/customer">Trang chủ</a></li>
+                            <li><a href="/boec/shop-grid">Shop</a></li>
                             <li><a href="#">Trang</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart">Cart</a></li>
-                                    <li><a href="./checkout">Check out</a></li>
+                                    <li><a href="/boec/shop-details">Shop Details</a></li>
+                                    <li><a href="/boec/shopping-cart">Cart</a></li>
+                                    <li><a href="/boec/checkout">Check out</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -123,12 +123,8 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <input type="text" id="search" placeholder="Bạn cần gì?">
+                                <button type="button" onclick="searchProduct(this)" class="site-btn">Tìm kiếm</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -181,10 +177,10 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="table_body">
                                 {% for cart_item in cart_items %}
                                 <tr>
-                                    <td class="shoping__cart__item">
+                                    <td class="shoping__cart__item" data-id="{{cart_item.id}}">
                                         <img src="/static/images/variant/{{cart_item.id}}.jpg" width="300" height="200" alt="">
                                         <h5>{{ cart_item.product.name }}</h5>
                                     </td>
@@ -194,7 +190,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="{{ cart_item.quantity }}">
+                                                <input type="text" class ="quant"value="{{ cart_item.quantity }}">
                                             </div>
                                         </div>
                                     </td>
@@ -237,7 +233,7 @@
                             <!-- <li>Subtotal <span>{{ total }}</span></li> -->
                             <li>Thành tiền <span>{{ total }}</span></li>
                         </ul>
-                        <a href="./checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a onclick="checkout(this)" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
@@ -304,7 +300,33 @@
     <script src="/static/js/mixitup.min.js"></script>
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/main.js"></script>
+    <script>
+        function searchProduct(elem) {
+            var search = $("#search").val();
+            window.location.replace(`/boec/shop-grid?search=${search}`)
+        }
+        function checkout(elem) {
+            var parent = $("#table_body").children("tr");
+            var obj = {}
+            for (let index = 0; index < parent.length; index++) {
+                const element = parent[index];
+                var quantity = parseInt($(element).find(".quant").first().val());
+                var id = $(element).find(".shoping__cart__item").first().data("id");
+                obj[`${id}`] = quantity
+            }
+            product_str = Object.keys(obj).join(";")
+            quantity_str = Object.values(obj).join(";")
 
+            $.ajax({
+            type: "POST",
+            data: {product: product_str,quantity: quantity_str },
+            url: "/api/cart/update_cart",
+            success: function (data) {
+                window.location.replace(`/boec/checkout`)
+            }
+            })
+        }
+    </script>
 
 </body>
 

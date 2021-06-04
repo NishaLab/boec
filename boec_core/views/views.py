@@ -142,5 +142,7 @@ def edit_profile(request):
 
 def get_user_role_root_path(user):
     if user.role == 2:
-        return "/boec/admin"
+        return "/boec/admin/oders/"
+    if user.role == 3:
+        return "/boec_admin/productlist/"   
     return "/boec/customer"

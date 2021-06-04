@@ -7,8 +7,9 @@ import logging
 def add_product_to_cart(request):
   key = request.POST.get('id') + ""
   quant = request.POST.get('quantity')
-  quant = int(quant)
-  if quant is None:
+  try:
+    quant = int(quant)
+  except:
     quant = 1
   is_new = False
   if 'cart' not in request.session:
@@ -68,6 +69,20 @@ def add_reply(request):
   comment = request.POST.get('content')
   reply = Reply(staff= user, review=review, content= comment)
   reply.save()
+  return JsonResponse({
+      "msg": "Success",
+  })
+@csrf_exempt
+def update_cart(request):
+  product = request.POST.get('product')
+  quantity = request.POST.get('quantity')
+  product_arr = product.split(";")
+  quantity_arr = quantity.split(";")
+  cart ={}
+  for index, item in enumerate(product_arr):
+    cart[item] = int(quantity_arr[index])
+  request.session['cart']= cart
+
   return JsonResponse({
       "msg": "Success",
   })

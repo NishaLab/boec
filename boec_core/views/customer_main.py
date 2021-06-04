@@ -8,6 +8,24 @@ class CustomerIndexView(View):
         context = {}
         user = request.user
         featured_products = ProductVariant.objects.filter(is_selling=True, is_feature=True)[:6]
+        electronic_category = Category.objects.get(pk=1)
+        electronic_subcategories = SubCategory.objects.filter(parent=electronic_category)
+        for subcategory in electronic_subcategories:
+            products = ProductVariant.objects.distinct().filter(is_selling=True,product__sub_category__id=subcategory.id)
+            setattr(subcategory, "products", products)
+
+        clothing_category = Category.objects.get(pk=3)
+        clothing_subcategories = SubCategory.objects.filter(parent=clothing_category)
+        for subcategory in clothing_subcategories:
+            products = ProductVariant.objects.distinct().filter(is_selling=True,product__sub_category__id=subcategory.id)
+            setattr(subcategory, "products", products)
+
+        book_category = Category.objects.get(pk=2)
+        book_subcategories = SubCategory.objects.filter(parent=book_category)
+        for subcategory in book_subcategories:
+            products = ProductVariant.objects.distinct().filter(is_selling=True,product__sub_category__id=subcategory.id)
+            setattr(subcategory, "products", products)
+
         if 'cart' not in request.session:
             cart = []
         else:
@@ -16,6 +34,10 @@ class CustomerIndexView(View):
             context["user_id"] = user
             context["favorite"] = Favorite.objects.filter(customer=user).count()
         context["featured_products"] = featured_products
+        context["electronic_subcategories"] = electronic_subcategories
+        context["clothing_category"] = clothing_subcategories
+        context["book_category"] = book_subcategories
+
         context["cart"] = len(cart)
         return render(request, "boec_core/customer/index.html",context)
 
@@ -65,6 +87,37 @@ class FavoriteView(View):
         context["cart"] = len(cart)
         return render(request, "boec_core/customer/favorite.html",context)
 
+class ShopGridView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        user = request.user
+        favorites = Favorite.objects.filter(customer=user)
+        search = request.GET.get("search")
+        print(search)
+        if search is None:
+            selling_products = ProductVariant.objects.filter(is_selling=True)
+        else:
+            selling_products = ProductVariant.objects.distinct().filter(is_selling=True, product__name__icontains=search)
+
+        if 'cart' not in request.session:
+            cart = []
+        else:
+            cart = request.session['cart']
+        if user.is_authenticated:
+            context["user_id"] = user
+            context["favorite"] = Favorite.objects.filter(customer=user).count()
+        context["selling_products"] = selling_products
+        context["cart"] = len(cart)
+        page_size = settings.PAGE_SIZE
+        page_num = request.GET.get("page_num")
+        p = Paginator(selling_products, page_size)
+        cur_page = p.page(1)
+        if page_num is not None:
+            cur_page = p.page(page_num)
+        
+        context["num_pages"] = p.num_pages
+        context["pages"] = range(1, p.num_pages+1)
+        return render(request, "boec_core/customer/shop-grid.html",context)
 class VariantDetailView(View):
     def get(self, request, *args, **kwargs):
         context = {}
@@ -132,6 +185,8 @@ class CheckoutView(View):
             amount = quantity * variant.price
             ordered_product = OrderedProduct(quantity=quantity, price=variant.price,
              order=order, product=variant)
+            variant.quantity -= quantity
+            variant.save()
             ordered_product.save()
         del request.session['cart']
         order.amount = total
