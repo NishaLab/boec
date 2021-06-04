@@ -249,6 +249,7 @@
                                     <div class="commment-area" style="margin-top:24px; border-top: solid 1px black;">
                                         {% for review in reviews %}
                                         <div style="border-bottom: solid 1px black; padding: 8px 0px 8px 0px;">
+                                            <h5>{{review.customer.first_name}}, {{review.customer.last_name}}</h5>
                                             <div class="star-rating d-inline-block">
                                                 {%for n in max_rating%}
                                                     {% if review.rating >= n %}
@@ -259,6 +260,24 @@
                                                 {%endfor%}
                                             </div>
                                             <textarea style="margin-top:5px;" class="form-control" disabled rows="3" id="comment" placeholder="Write Something"> {{review.content}} </textarea>
+                                            {% if user_id.role == 2 %}
+                                            <a id="result-4" data-review_id="{{review.id}}" data-user_id="{{user_id.id}}" type="button" onclick="toggleReply(this)" style="margin-top:10px;margin-left:5px;"
+                                            >Reply</a>
+                                            {% endif %}
+                                            <div class="replies" style = "margin-left: 50px;">
+                                                {%for reply in review.replies%}
+                                                    <div class="reply">
+                                                        <textarea style="margin-top:5px;" class="form-control" disabled rows="3" id="comment" placeholder="Write Something"> {{reply.content}} </textarea>
+                                                        <h5>{{reply.staff.first_name}}, {{reply.staff.last_name}}</h5>
+                                                    </div>
+                                                {%endfor%}
+
+                                                <div class="new_reply" style="display: none;">
+                                                    <textarea style="margin-top:5px;" class="form-control" rows="3" id="comment" placeholder="Write Something">  </textarea>
+                                                    <button id="result-4" data-review_id="{{review.id}}" data-user_id="{{user_id.id}}" type="button" onclick="newReply(this)" style="margin-top:10px;margin-left:5px;"
+                                                    class="btn btn-success">Comment</button>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         {% endfor %}
@@ -433,6 +452,22 @@
             type: "POST",
             data: {id: id, user: user, rating: rating, comment: comment},
             url: "/api/review/add_review",
+            success: function (data) {
+                location.reload();
+            }
+            })
+        }
+        function toggleReply(elem) {
+            $(elem).parent().find(".new_reply").toggle();
+        }
+        function newReply(elem) {
+            var id = $(elem).data("review_id");
+            var user = $(elem).data("user_id");
+            var content = $(elem).parent().find("textarea").val();
+            $.ajax({
+            type: "POST",
+            data: {id: id, user: user, content: content},
+            url: "/api/review/add_reply",
             success: function (data) {
                 location.reload();
             }

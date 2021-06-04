@@ -129,3 +129,9 @@ class Favorite(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     customer = models.ForeignKey('User', models.CASCADE, db_column='UserID')
     product = models.ForeignKey('ProductVariant', models.CASCADE, db_column='VariantId')
+
+class Reply(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    content = models.CharField(db_column='Content', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    staff = models.ForeignKey('User', models.CASCADE, db_column='UserID')
+    review = models.ForeignKey('CustomerReview', models.CASCADE, db_column='CustomerReview')
