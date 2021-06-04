@@ -806,6 +806,40 @@ ol {
 	right: -35px;
 }
 
+.featured {
+	padding-top: 80px;
+	padding-bottom: 40px;
+}
+
+.controlss {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.controlss ul li {
+	list-style: none;
+	font-size: 18px;
+	color: #1c1c1c;
+	display: inline-block;
+	margin-right: 25px;
+	position: relative;
+	cursor: pointer;
+}
+
+.controlss ul li.active:after {
+	opacity: 1;
+}
+
+.controlss ul li:after {
+	position: absolute;
+	left: 0;
+	bottom: -2px;
+	width: 100%;
+	height: 2px;
+	background: #7fad39;
+	content: "";
+	opacity: 0;
+}
 /*---------------------
   Featured
 -----------------------*/

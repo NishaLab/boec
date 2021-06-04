@@ -141,8 +141,8 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <input type="text" id="search" placeholder="Bạn cần gì?">
+                                <button type="button" onclick="searchProduct(this)" class="site-btn">Tìm kiếm</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -190,7 +190,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row featured__filter">
+            <div class="row featured__filter" id="featured_products">
                 {% for featured_product in featured_products %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix {{featured_product.product.category.name}}">
                     <div class="featured__item">
@@ -214,6 +214,131 @@
     </section>
     <!-- Featured Section End -->
 
+    <section class="spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Electronic Product</h2>
+                    </div>
+                    <div class="controlss">
+                        <ul>
+                            <li data-filterd="all" onclick="filterProduct(this, 'electronic_products')" >All</li>
+                            {% for subcategories in electronic_subcategories %}
+                                <li data-filterd="{{subcategories.name}}" onclick="filterProduct(this, 'electronic_products')">{{subcategories.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="electronic_products">
+                {% for subcategories in electronic_subcategories %}
+                    {% for product in subcategories.products %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 {{subcategories.name}}">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="/static/images/variant/{{product.id}}.jpg">
+                                    <ul class="product__item__pic__hover">
+                                    {% if user_id %}
+                                        <li><a onclick="addProductToFavorite(this)" data-variant_id ="{{product.id}}" data-user_id ="{{user_id.id}}"><i class="fa fa-heart"></i></a></li>
+                                    {% endif %}
+                                    <li><a onclick="addProductToCart(this)" data-variant_id ="{{product.id}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="/boec/variant/{{product.id}}">{{product.product.name}}</a></h6>
+                                    <h5>${{product.price}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Clothing Product</h2>
+                    </div>
+                    <div class="controlss">
+                        <ul>
+                            <li data-filterd="all" onclick="filterProduct(this, 'clothing_products')" >All</li>
+                            {% for subcategories in clothing_subcategories %}
+                                <li data-filterd="{{subcategories.name}}" onclick="filterProduct(this, 'clothing_products')">{{subcategories.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="clothing_products">
+                {% for subcategories in clothing_subcategories %}
+                    {% for product in subcategories.products %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 {{subcategories.name}}">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="/static/images/variant/{{product.id}}.jpg">
+                                    <ul class="product__item__pic__hover">
+                                    {% if user_id %}
+                                        <li><a onclick="addProductToFavorite(this)" data-variant_id ="{{product.id}}" data-user_id ="{{user_id.id}}"><i class="fa fa-heart"></i></a></li>
+                                    {% endif %}
+                                    <li><a onclick="addProductToCart(this)" data-variant_id ="{{product.id}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="/boec/variant/{{product.id}}">{{product.product.name}}</a></h6>
+                                    <h5>${{product.price}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Book Product</h2>
+                    </div>
+                    <div class="controlss">
+                        <ul>
+                            <li data-filterd="all" onclick="filterProduct(this, 'book_products')" >All</li>
+                            {% for subcategories in book_subcategories %}
+                                <li data-filterd="{{subcategories.name}}" onclick="filterProduct(this, 'book_products')">{{subcategories.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="book_products">
+                {% for subcategories in book_subcategories %}
+                    {% for product in subcategories.products %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 {{subcategories.name}}">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="/static/images/variant/{{product.id}}.jpg">
+                                    <ul class="product__item__pic__hover">
+                                    {% if user_id %}
+                                        <li><a onclick="addProductToFavorite(this)" data-variant_id ="{{product.id}}" data-user_id ="{{user_id.id}}"><i class="fa fa-heart"></i></a></li>
+                                    {% endif %}
+                                    <li><a onclick="addProductToCart(this)" data-variant_id ="{{product.id}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="/boec/variant/{{product.id}}">{{product.product.name}}</a></h6>
+                                    <h5>${{product.price}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
     <!-- Banner Begin -->
     <div class="banner">
         <div class="container">
@@ -333,6 +458,28 @@
             }
             })
         }
+        function searchProduct(elem) {
+            var search = $("#search").val();
+            window.location.replace(`/boec/shop-grid?search=${search}`)
+        }
+        function filterProduct(elem, item) {
+            var filter = $(elem).data("filterd");
+            console.log(item);
+            var parent = $(`#${item}search`).children(".col-lg-3");
+            for (let index = 0; index < parent.length; index++) {
+                const element = parent[index];
+                if(filter == "all"){
+                    $(element).show();
+                    continue
+                }
+                if($(element).hasClass(filter)){
+                    $(element).show()
+                }else{
+                    $(element).hide()
+                }
+            }
+        }
+
     </script>
 </body>
 
