@@ -34,11 +34,6 @@ class CustomerIndexView(View):
             context["user_id"] = user
             context["favorite"] = Favorite.objects.filter(customer=user).count()
         context["featured_products"] = featured_products
-<<<<<<< HEAD
-        context["cart"] = len(cart)
-        return render(request, "boec_core/customer/index.html",context)
-
-=======
         context["electronic_subcategories"] = electronic_subcategories
         context["clothing_subcategories"] = clothing_subcategories
         context["book_subcategories"] = book_subcategories
@@ -46,7 +41,6 @@ class CustomerIndexView(View):
         context["cart"] = len(cart)
         return render(request, "boec_core/customer/index.html",context)
 
->>>>>>> b3daf8cbafb8c3734ca4dc7d73d611ffd2aacd0b
 class CartView(View):
     def get(self, request, *args, **kwargs):
         context = {}
@@ -70,31 +64,6 @@ class CartView(View):
         context["cart"] = len(cart)
         context["cart_items"] = cart_items
         context["total"] = total
-<<<<<<< HEAD
-
-        return render(request, "boec_core/customer/shoping-cart.html",context)
-
-class FavoriteView(View):
-    def get(self, request, *args, **kwargs):
-        context = {}
-        user = request.user
-        favorites = Favorite.objects.filter(customer=user)
-        featured_products = []
-        for favorite in favorites:
-            featured_products.append(favorite.product)
-        
-        if 'cart' not in request.session:
-            cart = []
-        else:
-            cart = request.session['cart']
-        if user.is_authenticated:
-            context["user_id"] = user
-            context["favorite"] = Favorite.objects.filter(customer=user).count()
-        context["featured_products"] = featured_products
-        context["cart"] = len(cart)
-        return render(request, "boec_core/customer/favorite.html",context)
-
-=======
 
         return render(request, "boec_core/customer/shoping-cart.html",context)
 
@@ -185,7 +154,6 @@ class VariantDetailView(View):
         return render(request, "boec_core/customer/shop-details.html",context)
 
 
->>>>>>> b3daf8cbafb8c3734ca4dc7d73d611ffd2aacd0b
 class CheckoutView(View):
     def post(self, request, *args, **kwargs):
         user = request.user
