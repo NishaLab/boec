@@ -35,8 +35,8 @@ class CustomerIndexView(View):
             context["favorite"] = Favorite.objects.filter(customer=user).count()
         context["featured_products"] = featured_products
         context["electronic_subcategories"] = electronic_subcategories
-        context["clothing_category"] = clothing_subcategories
-        context["book_category"] = book_subcategories
+        context["clothing_subcategories"] = clothing_subcategories
+        context["book_subcategories"] = book_subcategories
 
         context["cart"] = len(cart)
         return render(request, "boec_core/customer/index.html",context)
@@ -91,9 +91,7 @@ class ShopGridView(View):
     def get(self, request, *args, **kwargs):
         context = {}
         user = request.user
-        favorites = Favorite.objects.filter(customer=user)
         search = request.GET.get("search")
-        print(search)
         if search is None:
             selling_products = ProductVariant.objects.filter(is_selling=True)
         else:
@@ -104,6 +102,7 @@ class ShopGridView(View):
         else:
             cart = request.session['cart']
         if user.is_authenticated:
+            favorites = Favorite.objects.filter(customer=user)
             context["user_id"] = user
             context["favorite"] = Favorite.objects.filter(customer=user).count()
         context["selling_products"] = selling_products
