@@ -11,11 +11,6 @@ urlpatterns = [
     path('boec/shopping-cart', views.CartView.as_view(), name="cart_view"),
     path('boec/checkout', views.CheckoutView.as_view(), name="checkout"),
     path('boec/favourite', views.FavoriteView.as_view(), name="favorite"),
-<<<<<<< HEAD
-    path('api/cart/add_product_to_cart', views.add_product_to_cart, name='add_product_to_cart'),
-    path('api/favorite/add_product_to_favorite', views.add_product_to_favorite, name='add_product_to_favorite'),
-
-=======
     path('boec/variant/<int:variant_id>', views.VariantDetailView.as_view(), name="variant_detail"),
     path('api/cart/add_product_to_cart', views.add_product_to_cart, name='add_product_to_cart'),
     path('api/favorite/add_product_to_favorite', views.add_product_to_favorite, name='add_product_to_favorite'),
@@ -28,6 +23,5 @@ urlpatterns = [
     
     path('edit_profile/',views.edit_profile,name = 'edit_profile'),
     path('signup/',views.signup,name = "signup"),
->>>>>>> b3daf8cbafb8c3734ca4dc7d73d611ffd2aacd0b
     path('', views.CustomerIndexView.as_view(), name='index')
 ]
