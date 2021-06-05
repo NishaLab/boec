@@ -52,7 +52,11 @@ class ProductVariant(models.Model):
     vendor = models.ForeignKey('Vendor', models.CASCADE, db_column='VendorId')
     is_feature = models.BooleanField(db_column='is_feature', default=False)
     is_selling = models.BooleanField(db_column='is_selling', default=False)
-    sale_off = models.FloatField(db_column='sale_off', default=0, null=True) 
+    sale_off = models.FloatField(db_column='sale_off', default=0, null=True)
+    brand = models.ForeignKey('Brand', models.CASCADE, db_column='BrandId',blank=True, null=True)
+    publisher = models.ForeignKey('Publisher', models.CASCADE, db_column='PublisherId',blank=True, null=True)
+    author = models.ForeignKey('Author', models.CASCADE, db_column='AuthorId',blank=True, null=True)
+    designer = models.ForeignKey('Designer', models.CASCADE, db_column='DesignerId',blank=True, null=True)
 class OrderedProduct(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     quantity = models.IntegerField(default=0)
@@ -129,3 +133,35 @@ class Favorite(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     customer = models.ForeignKey('User', models.CASCADE, db_column='UserID')
     product = models.ForeignKey('ProductVariant', models.CASCADE, db_column='VariantId')
+
+class Reply(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    content = models.CharField(db_column='Content', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    staff = models.ForeignKey('User', models.CASCADE, db_column='UserID')
+    review = models.ForeignKey('CustomerReview', models.CASCADE, db_column='CustomerReview')
+class Brand(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    address = models.CharField(db_column='Address', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)
+
+class Author(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    address = models.CharField(db_column='Address', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True) 
+    phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)  # Field name made lowercase.
+
+class Designer(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    address = models.CharField(db_column='Address', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True) 
+    phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)
+
+class Publisher(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    address = models.CharField(db_column='Address', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True) 
+    phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)
