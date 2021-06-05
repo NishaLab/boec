@@ -1,38 +1,29 @@
 from .views import *
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.models import AnonymousUser
 import code; 
 
-class CustomerIndexView(RoleRequiredView):
-    user_role = 1
-    form = None
-    template_path = "boec_core/customer/index.html"
-
-    def update_post_context(self, request, *args, **kwargs):
-        return super().update_post_context(request, *args, **kwargs)
-
-    def update_get_context(self, request, *args, **kwargs):
+class CustomerIndexView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
         user = request.user
         featured_products = ProductVariant.objects.filter(is_selling=True, is_feature=True)[:6]
         if 'cart' not in request.session:
             cart = []
         else:
             cart = request.session['cart']
-        self.context["user"] = user
-        self.context["featured_products"] = featured_products
-        self.context["cart"] = len(cart)
-        return super().update_get_context(request, *args, **kwargs)
+        if user.is_authenticated:
+            context["user_id"] = user
+            context["favorite"] = Favorite.objects.filter(customer=user).count()
+        context["featured_products"] = featured_products
+        context["cart"] = len(cart)
+        return render(request, "boec_core/customer/index.html",context)
 
-class CartView(RoleRequiredView):
-    user_role = 1
-    form = None
-    template_path = "boec_core/customer/shoping-cart.html"
-
-    def update_post_context(self, request, *args, **kwargs):
-        return super().update_post_context(request, *args, **kwargs)
-
-    def update_get_context(self, request, *args, **kwargs):
+class CartView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
         user = request.user
-        self.context["user"] = user
+        context["user"] = user
         cart = {}
         cart_items = []
         total = 0
@@ -48,20 +39,70 @@ class CartView(RoleRequiredView):
             setattr(variant, 'total', amount)
             total += amount
             cart_items.append(variant)
-        self.context["cart"] = len(cart)
-        self.context["cart_items"] = cart_items
-        self.context["total"] = total
+        context["cart"] = len(cart)
+        context["cart_items"] = cart_items
+        context["total"] = total
 
-        return super().update_get_context(request, *args, **kwargs)
+        return render(request, "boec_core/customer/shoping-cart.html",context)
 
-class CheckoutView(RoleRequiredView):
-    user_role = 1
-    form = None
-    template_path = "boec_core/customer/checkout.html"
+class FavoriteView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        user = request.user
+        favorites = Favorite.objects.filter(customer=user)
+        featured_products = []
+        for favorite in favorites:
+            featured_products.append(favorite.product)
+        
+        if 'cart' not in request.session:
+            cart = []
+        else:
+            cart = request.session['cart']
+        if user.is_authenticated:
+            context["user_id"] = user
+            context["favorite"] = Favorite.objects.filter(customer=user).count()
+        context["featured_products"] = featured_products
+        context["cart"] = len(cart)
+        return render(request, "boec_core/customer/favorite.html",context)
 
-    def update_post_context(self, request, *args, **kwargs):
-        return super().update_post_context(request, *args, **kwargs)
+class VariantDetailView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        user = request.user
+        variant_id = kwargs.get('variant_id')
+        variant = ProductVariant.objects.get(pk=variant_id)
+        reviews = CustomerReview.objects.filter(product=variant)
+        recommend_products = ProductVariant.objects.filter(is_selling=True, is_feature=True)[:6]
+        if 'cart' not in request.session:
+            cart = []
+        else:
+            cart = request.session['cart']
+        if user.is_authenticated:
+            context["user_id"] = user
+            context["favorite"] = Favorite.objects.filter(customer=user).count()
+        rating = 0
+        for review in reviews:
+            rating += review.rating
+            replies = Reply.objects.filter(review=review)
+            setattr(review, "replies", replies)
+        
+        if reviews.count() == 0:
+            rating = 0
+            context["is_float"] = False
+        else:
+            rating = rating/reviews.count()
+            if(rating%1!=0):
+                context["is_float"] = True
+        context["cart"] = len(cart)
+        context["variant"] = variant
+        context["reviews"] = reviews
+        context["ratings"] = int(rating)
+        context["max_rating"] = [1,2,3,4,5]
+        context["current_rating"] = [1] * int(rating)
+        return render(request, "boec_core/customer/shop-details.html",context)
 
+
+class CheckoutView(View):
     def post(self, request, *args, **kwargs):
         user = request.user
         cart = {}
@@ -73,8 +114,13 @@ class CheckoutView(RoleRequiredView):
         email = request.POST.get("email")
         city = request.POST.get("city")
         note = request.POST.get("note")
-        order = Order(recv_name=name,recv_city=city,recv_phone=phone,
-        recv_email=email,note=note,customer=user,payment_type="COD",shipping_address=address)
+        if user.is_authenticated:
+            order = Order(recv_name=name,recv_city=city,recv_phone=phone,
+            recv_email=email,note=note,customer=user,payment_type="COD",shipping_address=address)
+        else:
+            order = Order(recv_name=name,recv_city=city,recv_phone=phone,
+            recv_email=email,note=note,payment_type="COD",shipping_address=address)
+
         order.save()
         if 'cart' not in request.session:
             cart = {}
@@ -92,9 +138,10 @@ class CheckoutView(RoleRequiredView):
         order.save()
         return HttpResponseRedirect("/boec/customer")
 
-    def update_get_context(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
+        context = {}
         user = request.user
-        self.context["user"] = user
+        context["user"] = user
         cart = {}
         cart_items = []
         total = 0
@@ -110,8 +157,8 @@ class CheckoutView(RoleRequiredView):
             setattr(variant, 'total', amount)
             total += amount
             cart_items.append(variant)
-        self.context["cart"] = len(cart)
-        self.context["cart_items"] = cart_items
-        self.context["total"] = total
+        context["cart"] = len(cart)
+        context["cart_items"] = cart_items
+        context["total"] = total
 
-        return super().update_get_context(request, *args, **kwargs)
+        return render(request, "boec_core/customer/checkout.html",context)

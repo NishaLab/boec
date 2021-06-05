@@ -35,10 +35,9 @@ class ChangePasswordView(View):
                 return render(request, 'boec_core/user_base/change_password.html', context)
 
 class Index(View):
-    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         if not self.request.user.is_authenticated:
-            return render(request, 'boec_core/user_base/index.html')
+            return render(request, 'boec_core/customer/index.html')
         else:
             return HttpResponseRedirect(get_user_role_root_path(request.user))
 
@@ -50,7 +49,6 @@ class LoginView(auth_views.LoginView):
 
     def get_redirect_url(self):
         """ Overrided """
-
         if self.request.method != "POST":
             return super().get_redirect_url()
         if not self.request.user.is_authenticated:

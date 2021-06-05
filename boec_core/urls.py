@@ -10,7 +10,13 @@ urlpatterns = [
     path('boec/customer', views.CustomerIndexView.as_view(), name="main_customer"),
     path('boec/shopping-cart', views.CartView.as_view(), name="cart_view"),
     path('boec/checkout', views.CheckoutView.as_view(), name="checkout"),
+    path('boec/favourite', views.FavoriteView.as_view(), name="favorite"),
+    path('boec/variant/<int:variant_id>', views.VariantDetailView.as_view(), name="variant_detail"),
     path('api/cart/add_product_to_cart', views.add_product_to_cart, name='add_product_to_cart'),
+    path('api/favorite/add_product_to_favorite', views.add_product_to_favorite, name='add_product_to_favorite'),
+    path('api/review/add_review', views.add_review, name='add_review'),
+    path('api/review/add_reply', views.add_reply, name='add_reply'),
 
-    path('', views.Index.as_view(), name='index')
+
+    path('', views.CustomerIndexView.as_view(), name='index')
 ]
