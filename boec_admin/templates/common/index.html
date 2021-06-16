@@ -34,30 +34,20 @@
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="block m-t-xs font-bold">David Williams</span>
-                                <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                                <span class="block m-t-xs font-bold">Admin</span>
+                                <span class="text-muted text-xs block">Sales</span>
                             </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="dropdown-item" href="profile.html">Profile</a></li>
-                                <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                                <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
-                                <li class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                            </ul>
+                            
                         </div>
                         <div class="logo-element">
                             IN+
                         </div>
                     </li>
-                    <li><a href="ecommerce_products_grid.html">Products grid</a></li>
-                    <li><a href="productlist.html">Products list</a></li>
-                    <li><a href="/boec_admin/edit_product">Product edit</a></li>
-                    <li><a href="ecommerce_product_detail.html">Product detail</a></li>
-                    <li><a href="ecommerce-cart.html">Cart</a></li>
+                    
+                    <li><a href="/">Home</a></li>
                     <li><a href="{% url 'list_order' %}">Orders</a></li>
-                    <li><a href="ecommerce_payments.html">Credit Card form</a></li>
+                    <li><a href="{% url 'list_review' %}">Reviews</a></li>
                 </ul>
             </div>
         </nav>

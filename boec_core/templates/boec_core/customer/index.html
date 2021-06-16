@@ -33,47 +33,6 @@
 
 
     <!-- Header Section Begin -->
-<<<<<<< HEAD
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> boec@ptit.com</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fab fa-facebook"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                            </div>
-                            {% if user_id %}
-                                <div class="header__top__right__language">
-                                    <div href="#"><i class="fa fa-user"></i> {{ user.first_name}},{{ user.last_name }}</div>
-                                    <span class="arrow_carrot-down"></span>
-                                    <ul>
-                                        <li><a href="/user/logout">Log Out</a></li>
-                                        <li><a href="#">Edit Profile</a></li>
-                                    </ul>
-                                </div>
-                            {% else %}
-                                <div class="header__top__right__language">
-                                    <div href="#"><i class="fa fa-user"></i> Login </div>
-                                    <span class="arrow_carrot-down"></span>
-                                    <ul>
-                                        <li><a href="/user/login">Log In</a></li>
-                                        <li><a href="#">Register</a></li>
-                                    </ul>   
-                                </div>
-                            {% endif %}
-
-=======
         <header class="header">
             <div class="header__top">
                 <div class="container">
@@ -84,7 +43,6 @@
                                     <li><i class="fa fa-envelope"></i> boec@ptit.com</li>
                                 </ul>
                             </div>
->>>>>>> b3daf8cbafb8c3734ca4dc7d73d611ffd2aacd0b
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__right">
@@ -121,38 +79,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="/boec/customer"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="/boec/customer">Trang chủ</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Trang</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="/boec/shop-details.html">Shop Details</a></li>
-                                    <li><a href="/boec/shopping-cart">Cart</a></li>
-                                    <li><a href="/boec/checkout">Check out</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            {% if user_id %}
-                                <li><a href="/boec/favourite"><i class="fa fa-heart"></i> <span id="favorite_item_count">{{ favorite }}</span></a></li>
-                            {% endif %}
-                            <li><a href="/boec/shopping-cart"><i class="fa fa-shopping-bag"></i> <span id="cart_item_count">{{ cart }}</span></a></li>
-=======
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
@@ -182,7 +108,6 @@
                                 {% endif %}
                                 <li><a href="/boec/shopping-cart"><i class="fa fa-shopping-bag"></i> <span id="cart_item_count">{{ cart }}</span></a></li>
                             </ul>   
->>>>>>> b3daf8cbafb8c3734ca4dc7d73d611ffd2aacd0b
                         </ul>   
                             </ul>   
                         </div>
@@ -278,10 +203,6 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-<<<<<<< HEAD
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
-                            <h5>${{featured_product.price}}</h5>
-=======
                             <h6><a href="/boec/variant/{{featured_product.id}}">{{featured_product.product.name}}</a></h6>
                             <h5>${{featured_product.price}}</h5>
                         </div>
@@ -412,7 +333,6 @@
                                     <h5>${{product.price}}</h5>
                                 </div>
                             </div>
->>>>>>> b3daf8cbafb8c3734ca4dc7d73d611ffd2aacd0b
                         </div>
                     {% endfor %}
                 {% endfor %}
@@ -538,8 +458,6 @@
             }
             })
         }
-<<<<<<< HEAD
-=======
         function searchProduct(elem) {
             var search = $("#search").val();
             window.location.replace(`/boec/shop-grid?search=${search}`)
@@ -562,7 +480,6 @@
             }
         }
 
->>>>>>> b3daf8cbafb8c3734ca4dc7d73d611ffd2aacd0b
     </script>
 </body>
 

@@ -129,3 +129,8 @@ def changeStatusOrder(request, order_id):
     order.save()
     listOrder = Order.objects.all() 
     return render(request, 'common/oders.html', {"oders":listOrder})
+
+def reviews(request):
+    list_review = CustomerReview.objects.all()
+    
+    return render(request, "common/reviews.html", {"review":list_review} )

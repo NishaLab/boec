@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from django.urls import include
 
 urlpatterns = [
     path('user/login', views.LoginView.as_view(template_name="boec_core/user_base/login.html"), name="login"),
@@ -19,7 +20,7 @@ urlpatterns = [
     path('boec/shop-grid', views.ShopGridView.as_view(), name="shop_grid"),
     path('api/cart/update_cart', views.update_cart, name='update_cart'),
 
-
+    path('auth/', include('social_django.urls', namespace="social")),
     
     path('edit_profile/',views.edit_profile,name = 'edit_profile'),
     path('signup/',views.signup,name = "signup"),

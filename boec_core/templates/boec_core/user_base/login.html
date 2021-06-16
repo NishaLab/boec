@@ -47,6 +47,13 @@
               <div class="form-group form-button">
                 <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
               </div>
+              <div class="col">
+                <button class="btn btn-primary mb-2">
+                  <a href="{% url 'social:begin' 'facebook' %}" class="fb btn">
+                    <i class="fa fa-facebook fa-fw"></i>Login with Facebook
+                  </a>
+                </button>
+              </div>
             </form>
           </div>
         </div>

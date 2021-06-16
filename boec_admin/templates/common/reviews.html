@@ -13,7 +13,7 @@
             </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <a href="login.html">
+                        <a href="/user/logout">
                             <i class="fa fa-sign-out"></i> Log out
                         </a>
                     </li>
@@ -23,13 +23,13 @@
             </div>
                 <div class="row wrapper border-bottom white-bg page-heading">
                     <div class="col-lg-10">
-                        <h2>E-commerce orders</h2>
+                        <h2>E-commerce reviews</h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="index.html">Home</a>
                             </li>
                             <li class="breadcrumb-item active">
-                                <strong>Orders</strong>
+                                <strong>Reviews</strong>
                             </li>
                         </ol>
                     </div>
@@ -49,18 +49,17 @@
                                     <thead>
                                     <tr>
     
-                                        <th>Order ID</th>
+                                        <th>Review ID</th>
                                         <th data-hide="phone">Customer</th>
-                                        <th data-hide="phone">Amount</th>
+                                        <th data-hide="phone">Rating</th>
                                         <th data-hide="phone">Date added</th>
-                                        
-                                        <th data-hide="phone">Status</th>
+                                        <th data-hide="phone">Product</th>
                                         <th class="text-right">Action</th>
     
                                     </tr>
                                     </thead>
                                     <tbody>     
-                                        {% for item in oders %}                    
+                                        {% for item in review %}                    
                                     <tr>
                                         <td>
                                             {{item.id}}
@@ -70,13 +69,16 @@
                                         </td>
                                         <td>
                                             
-                                            {{ item.amount }}
+                                            {{ item.rating }}
                                         </td>
                                         <td>
                                             {{item.create_at|date:"d/ m/ Y"}}
                                         </td>
+                                        <td>
+                                            {{item.product.product.name}}
+                                        </td>
                                         
-                                        {% if item.status == 1 %}
+                                        <!-- {% if item.status == 1 %}
                                         <td>
                                             <span class="label label-warning">Đang xử lý</span>
                                         </td>
@@ -100,11 +102,11 @@
                                         <td>
                                             <span class="label label-danger" >Huỷ</span>
                                         </td>
-                                        {% endif %}
+                                        {% endif %} -->
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 
-                                                <button class="btn-white btn btn-xs"><a href="{% url 'detail_order' item.id %}">Edit</a></button>
+                                                <button class="btn-white btn btn-xs"><a href="/boec/variant/{{item.product.product.id}}">Detail</a></button>
                                                
                                             </div>
                                         </td>
