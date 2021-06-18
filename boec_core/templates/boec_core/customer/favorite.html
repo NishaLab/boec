@@ -58,7 +58,7 @@
                                     <span class="arrow_carrot-down"></span>
                                     <ul>
                                         <li><a href="/user/logout">Log Out</a></li>
-                                        <li><a href="#">Edit Profile</a></li>
+                                        <li><a href="/edit_profile">Edit Profile</a></li>
                                     </ul>
                                 </div>
                             {% else %}
@@ -199,7 +199,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">{{featured_product.product.name}}</a></h6>
+                            <h6><a href="/boec/variant/{{featured_product.id}}">{{featured_product.product.name}}</a></h6>
                             <h5>${{featured_product.price}}</h5>
                         </div>
                     </div>

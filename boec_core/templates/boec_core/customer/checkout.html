@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/static/css/organi/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/organi/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/organi/boec.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/new_modal.css" type="text/css">
 </head>
 
 <body>
@@ -58,7 +59,7 @@
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <li><a href="/user/logout">Log Out</a></li>
-                                    <li><a href="#">Edit Profile</a></li>
+                                    <li><a href="/edit_profile">Edit Profile</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -181,13 +182,45 @@
                                 <p>Tên Người nhận<span>*</span></p>
                                 <input type="text" name="name"  value="{{user.last_name}}, {{user.first_name}}">
                             </div>
-                            <div class="checkout__input">
-                                <p>Địa chỉ nhận hàng<span>*</span></p>
-                                <input type="text" name="address" placeholder="Apartment, suite, unite ect (optinal)" value="{{user.address}}">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Thành phố<span>*</span></p>
+                                        <select name="city">
+                                            {% for city in cities %}
+                                                <option value="{{city.id}}"> {{city.name}} </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Quận<span>*</span></p>
+                                        <select name="district">
+                                            {% for district in districts %}
+                                            <option value="{{district.id}}"> {{district.name}} </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="checkout__input">
-                                <p>Thành phố<span>*</span></p>
-                                <input type="text"  name="city">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Đường<span>*</span></p>
+                                        <select name="street">
+                                            {% for street in streets %}
+                                            <option value="{{street.id}}"> {{street.name}} </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Địa chỉ cụ thể<span>*</span></p>
+                                        <input type="text" name="detail">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -215,33 +248,28 @@
                                 <div class="checkout__order__products">Sản phẩm <span>Thành tiền</span></div>
                                 <ul>
                                     {% for cart_item in cart_items %}
-                                    <li> {{cart_item.product.name}} <span>{{cart_item.total}}</span></li>
+                                    <li> {{cart_item.product.product.name}} <span>{{cart_item.total}}</span></li>
                                     {% endfor %}
 
                                 </ul>
                                 <!-- <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div> -->
                                 <div class="checkout__order__total">Thành tiền <span>{{total}}</span></div>
-                                <!-- <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div> -->
-                                <!-- <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div> -->
-                                <!-- <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div> -->
+                                <div class="checkout__order__total">
+                                    Mã Voucher
+                                    <input type="text" name="voucher">
+                                </div>
+                                <div class="checkout__order__total">
+                                    Giao hàng dự kiến
+                                    <input type="text" name="estimated" value="{{estimated}}"disabled>
+                                </div>
+                                <div class="checkout__input">
+                                    <p>Đơn vị vận chuyển<span>*</span></p>
+                                    <select name="department">
+                                        {% for department in departments %}
+                                        <option value="{{department.id}}"> {{department.name}} </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                                 <button type="submit" class="site-btn">Chốt Đơn</button>
                             </div>
                         </div>
@@ -309,7 +337,6 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
     <!-- Js Plugins -->
     <script src="/static/js/jquery-3.3.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
