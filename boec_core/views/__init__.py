@@ -3,3 +3,4 @@ from .user_base import *
 from .admin import *
 from .customer_main import *
 from .api import *
+from .social_authen import *

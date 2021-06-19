@@ -13,3 +13,7 @@ class ShippingStatus(Enum):
     DANG_GIAO_HANG = 4
     DA_GIAO = 5
     HUY = 6
+
+class VoucherType(Enum):
+    SHIPPING = 1
+    ORDER = 2

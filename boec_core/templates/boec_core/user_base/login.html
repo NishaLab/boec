@@ -14,7 +14,10 @@
   <link rel="stylesheet" href="/static/tuananh/fonts/material-icon/css/material-design-iconic-font.min.css">
 
   <!-- Main css -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <link rel="stylesheet" href="/static/tuananh/css/style.css">
+  <link rel="stylesheet" href="/static/css/final.css">
 </head>
 
 <body>
@@ -48,6 +51,16 @@
                 <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
               </div>
             </form>
+            <div class="col">
+              <a href="{% url 'social:begin' 'facebook' %}" class="fb btn">
+                <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+              </a>
+            </div>
+            <div class="col">
+              <a href="{% url 'social:begin' 'google-oauth2' %}" class="google btn">
+                <i class="fa fa-google fa-fw"></i> Login with google
+              </a>
+            </div>
           </div>
         </div>
       </div>
