@@ -14,6 +14,7 @@ urlpatterns = [
     path('boec/favourite', views.FavoriteView.as_view(), name="favorite"),
     path('boec/success', views.SuccessView.as_view(), name="success"),
     path('boec/failure', views.FailureView.as_view(), name="failure"),
+    path('boec/failure_voucher', views.FailureVoucherView.as_view(), name="failure_voucher"),
     path('boec/variant/<int:variant_id>', views.VariantDetailView.as_view(), name="variant_detail"),
     path('api/cart/add_product_to_cart', views.add_product_to_cart, name='add_product_to_cart'),
     path('api/favorite/add_product_to_favorite', views.add_product_to_favorite, name='add_product_to_favorite'),

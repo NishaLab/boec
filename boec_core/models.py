@@ -23,6 +23,7 @@ class User(AbstractUser):
     status = models.CharField(db_column='status', max_length=100, default="Available")
     email = models.CharField(db_column='email', max_length=100, default="")
     userlink = models.CharField(db_column='link', max_length=100, default="")
+    models.Index(fields=['first_name',]),
 
 class Vendor(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -30,6 +31,7 @@ class Vendor(models.Model):
     address = models.CharField(db_column='Address', max_length=255, blank=True, null=True)  # Field name made lowercase.
     phone = models.CharField(db_column='Phone', max_length=255, blank=True, null=True)  # Field name made lowercase.
     desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    models.Index(fields=['name',]),
 
 class Category(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -47,6 +49,7 @@ class Product(models.Model):
     desc = models.CharField(db_column='Desc', max_length=255, blank=True, null=True)  # Field name made lowercase.
     category = models.ForeignKey('Category', models.CASCADE, db_column='CategoryId')  # Field name made lowercase.
     sub_category = models.ForeignKey('SubCategory', models.CASCADE, db_column='SubCategoryId', null=True)
+    models.Index(fields=['name',]),
 
 class ProductVariant(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.

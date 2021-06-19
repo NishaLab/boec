@@ -180,6 +180,11 @@ class FailureView(View):
         context = {}
         user = request.user
         return render(request, "boec_core/customer/failure_page.html",context)
+class FailureVoucherView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        user = request.user
+        return render(request, "boec_core/customer/failure_voucher.html",context)
 class CheckoutView(View):
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -200,11 +205,14 @@ class CheckoutView(View):
         district = District.objects.get(pk=district)
         street = Street.objects.get(pk=street)
         department = ShippingDepartment.objects.get(pk=department)
+        has_voucher = voucher
         voucher = Voucher.objects.filter(code=voucher).first()
         note = request.POST.get("note")
         # hiện tại chưa có api lấY giá vận chuyểN -> mặc định giá vậN chuyển là 30
         shipping_fee = 30
         # nếu user đăng nhập
+        if voucher is None and has_voucher is not None:
+            return HttpResponseRedirect("/boec/failure_voucher")
         if user.is_authenticated:
             order = Order(recv_name=name,recv_city=city, recv_district = district, recv_street=street, recv_house=detail, recv_phone=phone,
             recv_email=email,note=note,customer=user,payment_type="COD")
